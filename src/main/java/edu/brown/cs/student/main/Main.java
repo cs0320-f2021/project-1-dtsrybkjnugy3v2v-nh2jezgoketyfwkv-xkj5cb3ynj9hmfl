@@ -8,11 +8,15 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
+import edu.brown.cs.student.api.ApiClient;
+import edu.brown.cs.student.api.ClientRequestGenerator;
+import edu.brown.cs.student.stars.MathBot;
+import edu.brown.cs.student.stars.NeighborCalculator;
+import edu.brown.cs.student.stars.Star;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
@@ -60,6 +64,9 @@ public final class Main {
     // use "--port <n>" to specify what port on which the server runs
     parser.accepts("port").withRequiredArg().ofType(Integer.class)
         .defaultsTo(DEFAULT_PORT);
+
+    // set up ApiClient
+    ApiClient client = new ApiClient();
 
     OptionSet options = parser.parse(args);
     if (options.has("gui")) {
@@ -111,6 +118,11 @@ public final class Main {
                     starName.toString().length() - 1).strip());
               }
               break;
+            case "basicGet":
+              client.makeRequest(ClientRequestGenerator.getIntroGetRequest("https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/introResource"));
+              break;
+
+
             default:
               System.out.println("ERROR: Invalid input for REPL");
           }

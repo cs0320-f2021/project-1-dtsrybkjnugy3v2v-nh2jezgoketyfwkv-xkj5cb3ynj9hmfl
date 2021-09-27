@@ -1,4 +1,6 @@
-package edu.brown.cs.student.main;
+package edu.brown.cs.student.stars;
+
+import edu.brown.cs.student.stars.Star;
 
 import java.util.Comparator;
 
