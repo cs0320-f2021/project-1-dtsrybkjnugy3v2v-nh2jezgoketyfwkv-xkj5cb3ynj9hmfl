@@ -19,7 +19,7 @@ public class ApiClient {
     // See https://docs.oracle.com/en/java/javase/11/docs/api/java.net.http/java/net/http/HttpClient.html
     this.client = HttpClient.newBuilder()
         .version(HttpClient.Version.HTTP_2)
-        .connectTimeout(Duration.ofSeconds(60))
+        .connectTimeout(Duration.ofSeconds(10))
         .build();
   }
 
