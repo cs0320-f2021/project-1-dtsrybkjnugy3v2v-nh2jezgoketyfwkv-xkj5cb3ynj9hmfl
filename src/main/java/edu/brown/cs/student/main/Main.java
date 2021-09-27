@@ -90,7 +90,7 @@ public final class Main {
               _stars = this.createStarList(_file);
               break;
             case "naive_neighbors":
-              if (arguments.length == 5) {
+              if (arguments.length == 5 && arguments[2].charAt(0) != '"') {
                 int numNeighbors = Integer.parseInt(arguments[1]);
                 System.out.println("Read " + _stars.size() + " from " + _file);
                 double x = Double.parseDouble(arguments[2]);
@@ -98,12 +98,17 @@ public final class Main {
                 double z = Double.parseDouble(arguments[4]);
                 NeighborCalculator neighborCalc = new NeighborCalculator(_stars);
                 neighborCalc.nearest(numNeighbors, x, y, z);
-              } else if (arguments.length == 3) {
+              } else if (arguments.length >= 3) {
                 System.out.println("Read " + _stars.size() + " stars" + " from " + _file);
                 int numNeighbors = Integer.parseInt(arguments[1]);
-                String starName = arguments[2].replaceAll("^\"+|\"+$", "");
+                StringBuilder starName = new StringBuilder();
+                // Concatenates name
+                for (int i = 2; i < arguments.length; i++) {
+                  starName.append(" ").append(arguments[i]);
+                }
                 NeighborCalculator neighborCalc = new NeighborCalculator(_stars);
-                neighborCalc.nearest(numNeighbors, starName);
+                neighborCalc.nearest(numNeighbors, starName.substring(2,
+                    starName.toString().length() - 1).strip());
               }
               break;
             default:
@@ -118,6 +123,7 @@ public final class Main {
       System.out.println("ERROR: Invalid input for REPL");
     }
   }
+
 
   private HashMap<String, Star> createStarList(String file) {
     _stars = new HashMap<>();
