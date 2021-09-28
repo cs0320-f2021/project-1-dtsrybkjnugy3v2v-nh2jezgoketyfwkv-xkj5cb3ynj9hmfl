@@ -1,13 +1,8 @@
 package edu.brown.cs.student.api;
 
-import com.google.gson.Gson;
-
-import java.net.http.HttpRequest;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -33,24 +28,31 @@ public class UserData {
   public void getData(){
     ApiClient client = new ApiClient();
 
-    // Cycles through all URIs so we can build a list of Users
 
-//    for(String num: nums){
-//      client.makeRequest(ClientRequestGenerator.getRequest(URIP1 + num +URIP2));
-//    }
-    User[] users;
-    GsonParser gsonParser = new GsonParser();
-    users = gsonParser.parseUser(client.makeRequest(ClientRequestGenerator.getRequest(URIP1 + "two" +URIP2)));
-    Collections.addAll(userSet, users);
-    for (User user: userSet){
-      System.out.println(user.user_id);
+    // Cycles through all URIs so we can build a list of Users
+    for(String num: nums){
+      User[] users;
+      GsonParser gsonParser = new GsonParser();
+      users = gsonParser.parseUser(client.makeRequest(ClientRequestGenerator.getRequest(URIP1 + num +URIP2)));
+      if(users != null){
+        Collections.addAll(userSet, users);
+      }
     }
+    // Removes the null user from the set
+    User nullUser = new User();
+    userSet.remove(nullUser);
+
+    //Prints each user's data
+    for (User user: userSet){
+      System.out.println(user.toString());
+    }
+    System.out.println(userSet.size());
   }
 
   /**
    * Returns a list of all users
    */
-  public void getUsers(){
-
+  public Set<User> getUsers(){
+    return userSet;
   }
 }

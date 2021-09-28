@@ -120,12 +120,13 @@ public final class Main {
                     starName.toString().length() - 1).strip());
               }
               break;
-            case "basicGet":
+            case "userGet":
               UserData userData = new UserData();
               userData.getData();
               //client.makeRequest(userData.getData());
               //client.makeRequest(ClientRequestGenerator.getIntroGetRequest("https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/introResource"));
               break;
+            case "users":
 
 
             default:

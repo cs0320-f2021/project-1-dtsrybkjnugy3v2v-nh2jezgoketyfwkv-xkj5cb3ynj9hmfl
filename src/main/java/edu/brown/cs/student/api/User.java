@@ -12,7 +12,6 @@ public class User {
   public String height;
   public int age;
   public String body_type;
-  public String athletic;
   public String horoscope;
 
   @Override
@@ -27,13 +26,7 @@ public class User {
       return false;
     }
     User user = (User) o;
-    return user_id == user.user_id && age == user.age &&
-        Objects.equals(weight, user.weight) &&
-        Objects.equals(bust_size, user.bust_size) &&
-        Objects.equals(height, user.height) &&
-        Objects.equals(body_type, user.body_type) &&
-        Objects.equals(athletic, user.athletic) &&
-        Objects.equals(horoscope, user.horoscope);
+    return user_id == user.user_id;
   }
 
   @Override
@@ -41,9 +34,10 @@ public class User {
     return Objects.hash(user_id);
   }
 
-  //TODO write a toString statement so we can print data on console
-//  @Override
-//  public String toString() {
-//    return "User [id=" + id + ", name=" + name + "]";
-//  }
+  @Override
+  public String toString() {
+    return "User [id=" + user_id + ", weight=" + weight +  ", bust_size=" + bust_size +
+        ", height=" + height + ", age=" + age + ", body_type=" + body_type +
+         ", horoscope=" + horoscope + "]";
+  }
 }
