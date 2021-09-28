@@ -127,8 +127,18 @@ public final class Main {
               //client.makeRequest(ClientRequestGenerator.getIntroGetRequest("https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/introResource"));
               break;
             case "users":
-
-
+              // todo: load users data into a KDTree
+              String file = arguments[1];
+              System.out.println("Loaded x users from " + file);
+              break;
+            case "similar":
+              // todo: print out user_ids of the most similar k users
+              System.out.println("k neighbors");
+              break;
+            case "classify":
+              // todo: print out horoscope comparison chart of the k most similar users
+              System.out.println("horoscopes of k neighbors");
+              break;
             default:
               System.out.println("ERROR: Invalid input for REPL");
           }
