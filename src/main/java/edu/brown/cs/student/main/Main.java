@@ -122,7 +122,8 @@ public final class Main {
               break;
             case "basicGet":
               UserData userData = new UserData();
-              client.makeRequest(userData.getOne());
+              userData.getData();
+              //client.makeRequest(userData.getData());
               //client.makeRequest(ClientRequestGenerator.getIntroGetRequest("https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/introResource"));
               break;
 
@@ -132,6 +133,7 @@ public final class Main {
           }
 
         } catch (Exception e) {
+          e.printStackTrace();
           System.out.println("ERROR: We couldn't process your input");
         }
       }

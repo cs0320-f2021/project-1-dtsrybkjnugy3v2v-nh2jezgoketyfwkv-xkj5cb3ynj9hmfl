@@ -23,12 +23,13 @@ public class ApiClient {
         .build();
   }
 
-  public void makeRequest(HttpRequest req) {
+  public String makeRequest(HttpRequest req) {
 
     try {
       HttpResponse<String> apiResponse = client.send(req, HttpResponse.BodyHandlers.ofString());
-      System.out.println("Status " + apiResponse.statusCode());
-      System.out.println(apiResponse.body());
+//      System.out.println("Status " + apiResponse.statusCode());
+//      System.out.println(apiResponse.body());
+      return apiResponse.body();
 
     } catch (IOException ioe) {
       System.out.println("An I/O error occurred when sending or receiving data.");
@@ -47,5 +48,6 @@ public class ApiClient {
       System.out.println("There was a security configuration error.");
       System.out.println(se.getMessage());
     }
+    return null;
   }
 }
