@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
 public class GsonParser {
-  public User[] parseUser(String userJson){
+  public User[] parseUser(String userJson) {
     Gson gson = new Gson();
     // Catches errors that arise from potential type mismatches
     try {
@@ -14,7 +14,7 @@ public class GsonParser {
     }
   }
 
-  public Review[] parseReview(String reviewJson){
+  public Review[] parseReview(String reviewJson) {
     Gson gson = new Gson();
     // Catches errors that arise from potential type mismatches
     try {

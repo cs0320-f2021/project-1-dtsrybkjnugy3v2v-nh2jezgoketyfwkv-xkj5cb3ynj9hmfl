@@ -53,7 +53,7 @@ public class UserData {
    * Returns a list of all users.
    * @return a set of Users
    */
-  public Set<User> getUsers() {
+  public Set<User> getSet() {
     return userSet;
   }
 }
