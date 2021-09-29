@@ -12,6 +12,9 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
+import com.google.gson.Gson;
+import edu.brown.cs.student.api.GsonParser;
+import edu.brown.cs.student.api.Rent;
 import edu.brown.cs.student.api.RentData;
 import edu.brown.cs.student.api.ReviewData;
 import edu.brown.cs.student.api.UserData;
@@ -134,6 +137,15 @@ public final class Main {
               // todo: load users data into a KDTree
               String file = arguments[1];
               System.out.println("Loaded x users from " + file);
+              break;
+            case "rent":
+              // todo: load users data into a KDTree
+              String url = arguments[1];
+              GsonParser gsonParser = new GsonParser();
+              Rent[] rents = gsonParser.openRentFile(url);
+              for (Rent rent: rents) {
+                System.out.println(rent.toString());
+              }
               break;
             case "similar":
               // todo: print out user_ids of the most similar k users

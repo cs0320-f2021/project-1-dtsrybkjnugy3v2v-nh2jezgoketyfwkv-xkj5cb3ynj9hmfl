@@ -3,6 +3,10 @@ package edu.brown.cs.student.api;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 public class GsonParser {
   public User[] parseUser(String userJson) {
     Gson gson = new Gson();
@@ -35,5 +39,24 @@ public class GsonParser {
     } catch (JsonSyntaxException e) {
       return null;
     }
+  }
+
+  public Rent[] openRentFile(String url) {
+    try {
+      Gson gson = new Gson();
+
+      // create a reader
+      Reader reader = Files.newBufferedReader(Paths.get(url));
+
+      // convert JSON string to User object
+      Rent[] rent = gson.fromJson(reader, Rent[].class);
+      // close reader
+      reader.close();
+      return rent;
+
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+    return null;
   }
 }
