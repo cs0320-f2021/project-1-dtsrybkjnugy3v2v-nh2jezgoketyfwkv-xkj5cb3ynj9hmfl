@@ -5,19 +5,19 @@ import java.util.Objects;
 /**
  * This class is used for parsing json data. It is an outline af a user
  */
+
 public class Review {
-  public long user_id;
-  public String weight;
-  public String bust_size;
-  public String height;
-  public int age;
-  public String body_type;
-  public String horoscope;
+  public String review_text;
+  public String review_summary;
+  public String review_date;
+  public long id;
+  @Override
+  public String toString() {
+    return "User [review_text=" + review_text +  ", review_summary=" + review_summary + ", review_date="
+        + review_date + ", id=" + id + "]";
+  }
 
   @Override
-  /**
-   * Compares users. Used to ensure we don't add similar users to the list
-   */
   public boolean equals(Object o) {
     if (this == o) {
       return true;
@@ -25,19 +25,12 @@ public class Review {
     if (o == null || getClass() != o.getClass()) {
       return false;
     }
-    User user = (User) o;
-    return user_id == user.id;
+    Review review = (Review) o;
+    return id == review.id;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(user_id);
-  }
-
-  @Override
-  public String toString() {
-    return "User [id=" + user_id + ", weight=" + weight +  ", bust_size=" + bust_size + ", height="
-        + height + ", age=" + age + ", body_type=" + body_type
-        + ", horoscope=" + horoscope + "]";
+    return Objects.hash(id);
   }
 }
