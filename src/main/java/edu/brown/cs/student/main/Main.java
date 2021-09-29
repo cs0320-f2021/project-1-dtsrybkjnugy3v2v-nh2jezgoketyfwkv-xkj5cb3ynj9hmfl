@@ -12,6 +12,7 @@ import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
 
+import edu.brown.cs.student.api.RentData;
 import edu.brown.cs.student.api.ReviewData;
 import edu.brown.cs.student.api.UserData;
 import edu.brown.cs.student.stars.MathBot;
@@ -122,9 +123,12 @@ public final class Main {
               //client.makeRequest(ClientRequestGenerator.getIntroGetRequest("https://epb3u4xo11.execute-api.us-east-1.amazonaws.com/Prod/introResource"));
               break;
             case "reviewGet":
-              // todo: load users data into a KDTree
               ReviewData reviewData = new ReviewData();
               reviewData.getData();
+              break;
+            case "rentGet":
+              RentData rentData = new RentData();
+              rentData.getData();
               break;
             case "users":
               // todo: load users data into a KDTree
