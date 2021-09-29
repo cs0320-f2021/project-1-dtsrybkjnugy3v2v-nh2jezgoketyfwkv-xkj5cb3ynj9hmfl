@@ -55,8 +55,43 @@ public class GsonParser {
       return rent;
 
     } catch (Exception ex) {
-      ex.printStackTrace();
+      return null;
     }
-    return null;
+  }
+
+  public User[] openUserFile(String url) {
+    try {
+      Gson gson = new Gson();
+
+      // create a reader
+      Reader reader = Files.newBufferedReader(Paths.get(url));
+
+      // convert JSON string to User object
+      User[] users = gson.fromJson(reader, User[].class);
+      // close reader
+      reader.close();
+      return users;
+
+    } catch (Exception ex) {
+      return null;
+    }
+  }
+
+  public Review[] openReviewFile(String url) {
+    try {
+      Gson gson = new Gson();
+
+      // create a reader
+      Reader reader = Files.newBufferedReader(Paths.get(url));
+
+      // convert JSON string to User object
+      Review[] reviews = gson.fromJson(reader, Review[].class);
+      // close reader
+      reader.close();
+      return reviews;
+
+    } catch (Exception ex) {
+      return null;
+    }
   }
 }

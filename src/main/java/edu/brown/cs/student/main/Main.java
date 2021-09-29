@@ -16,7 +16,9 @@ import com.google.gson.Gson;
 import edu.brown.cs.student.api.GsonParser;
 import edu.brown.cs.student.api.Rent;
 import edu.brown.cs.student.api.RentData;
+import edu.brown.cs.student.api.Review;
 import edu.brown.cs.student.api.ReviewData;
+import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserData;
 import edu.brown.cs.student.stars.MathBot;
 import edu.brown.cs.student.stars.NeighborCalculator;
@@ -74,6 +76,10 @@ public final class Main {
       runSparkServer((int) options.valueOf("port"));
     }
 
+    // Set up global variables
+    String url;
+    GsonParser gsonParser = new GsonParser();
+
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       String input;
       while ((input = br.readLine()) != null) {
@@ -129,22 +135,33 @@ public final class Main {
               ReviewData reviewData = new ReviewData();
               reviewData.getData();
               break;
+            // Gathers rent objects from the api data
             case "rentGet":
               RentData rentData = new RentData();
               rentData.getData();
               break;
             case "users":
               // todo: load users data into a KDTree
-              String file = arguments[1];
-              System.out.println("Loaded x users from " + file);
+              url = arguments[1];
+              User[] users = gsonParser.openUserFile(url);
+              for (User user: users) {
+                System.out.println(user.toString());
+              }
               break;
+            // retrieves rent data at a given file location
             case "rent":
               // todo: load users data into a KDTree
-              String url = arguments[1];
-              GsonParser gsonParser = new GsonParser();
+              url = arguments[1];
               Rent[] rents = gsonParser.openRentFile(url);
               for (Rent rent: rents) {
                 System.out.println(rent.toString());
+              }
+            case "reviews":
+              // todo: load users data into a KDTree
+              url = arguments[1];
+              Review[] reviews = gsonParser.openReviewFile(url);
+              for (Review review: reviews) {
+                System.out.println(review.toString());
               }
               break;
             case "similar":
