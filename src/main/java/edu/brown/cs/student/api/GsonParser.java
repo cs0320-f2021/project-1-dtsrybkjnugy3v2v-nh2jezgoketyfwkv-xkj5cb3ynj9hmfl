@@ -55,6 +55,7 @@ public class GsonParser {
       return rent;
 
     } catch (Exception ex) {
+      ex.printStackTrace();
       return null;
     }
   }
@@ -76,6 +77,7 @@ public class GsonParser {
       return null;
     }
   }
+
 
   public Review[] openReviewFile(String url) {
     try {

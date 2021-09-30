@@ -31,7 +31,7 @@ public class Rent {
   }
   @Override
   public String toString() {
-    return "User [fit=" + fit + ", user_id=" + user_id +  ", item_id=" + item_id + ", rating="
+    return "Rent [fit=" + fit + ", user_id=" + user_id +  ", item_id=" + item_id + ", rating="
         + rating + ", rented_for=" + rented_for + ", category=" + category
         + ", size=" + size + ", id=" + id  + "]";
   }

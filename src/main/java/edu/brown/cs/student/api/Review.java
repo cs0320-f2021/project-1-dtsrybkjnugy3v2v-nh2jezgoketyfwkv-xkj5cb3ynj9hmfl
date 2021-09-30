@@ -13,7 +13,7 @@ public class Review {
   public long id;
   @Override
   public String toString() {
-    return "User [review_text=" + review_text +  ", review_summary=" + review_summary + ", review_date="
+    return "Review [review_text=" + review_text +  ", review_summary=" + review_summary + ", review_date="
         + review_date + ", id=" + id + "]";
   }
 
