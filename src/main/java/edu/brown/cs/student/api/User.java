@@ -6,13 +6,13 @@ import java.util.Objects;
  * This class is used for parsing json data. It is an outline af a user
  */
 public class User {
-  public long user_id;
-  public String weight;
-  public String bust_size;
-  public String height;
-  public int age;
-  public String body_type;
-  public String horoscope;
+  private long user_id;
+  private String weight;
+  private String bust_size;
+  private String height;
+  private int age;
+  private String body_type;
+  private String horoscope;
   @Override
   public boolean equals(Object o) {
     if (this == o) {
