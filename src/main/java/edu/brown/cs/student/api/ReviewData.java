@@ -41,12 +41,6 @@ public class ReviewData {
     // Removes the null user from the set
     Review nullReview = new Review();
     reviewSet.remove(nullReview);
-
-    //Prints each user's data
-    for (Review review: reviewSet) {
-      System.out.println(review.toString());
-    }
-    System.out.println(reviewSet.size());
   }
 
   /**

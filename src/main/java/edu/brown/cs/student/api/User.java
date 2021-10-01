@@ -13,6 +13,9 @@ public class User {
   private int age;
   private String body_type;
   private String horoscope;
+  public User(Long id) {
+    user_id = id;
+  }
   @Override
   public boolean equals(Object o) {
     if (this == o) {
