@@ -39,14 +39,8 @@ public class UserData {
       }
     }
     // Removes the null user from the set
-    User nullUser = new User();
+    User nullUser = new User(0L);
     userSet.remove(nullUser);
-
-    //Prints each user's data
-    for (User user: userSet) {
-      System.out.println(user.toString());
-    }
-    System.out.println(userSet.size());
   }
 
   /**

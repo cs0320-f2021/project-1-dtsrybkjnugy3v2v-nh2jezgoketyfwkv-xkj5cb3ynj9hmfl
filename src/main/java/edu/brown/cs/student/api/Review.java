@@ -7,10 +7,10 @@ import java.util.Objects;
  */
 
 public class Review {
-  public String review_text;
-  public String review_summary;
-  public String review_date;
-  public long id;
+  private String review_text;
+  private String review_summary;
+  private String review_date;
+  private long id;
   @Override
   public String toString() {
     return "Review [review_text=" + review_text +  ", review_summary=" + review_summary + ", review_date="

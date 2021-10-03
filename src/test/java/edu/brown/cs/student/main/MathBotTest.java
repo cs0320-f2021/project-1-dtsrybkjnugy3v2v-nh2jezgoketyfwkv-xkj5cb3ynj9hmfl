@@ -1,4 +1,4 @@
-package test.java.edu.brown.cs.student.main;
+package edu.brown.cs.student.main;
 
 import static org.junit.Assert.assertEquals;
 
