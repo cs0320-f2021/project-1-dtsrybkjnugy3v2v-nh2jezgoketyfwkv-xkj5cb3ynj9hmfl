@@ -156,6 +156,7 @@ public final class Main {
               for (Rent rent: rents) {
                 System.out.println(rent.toString());
               }
+              break;
             case "reviews":
               // todo: load users data into a KDTree
               url = arguments[1];

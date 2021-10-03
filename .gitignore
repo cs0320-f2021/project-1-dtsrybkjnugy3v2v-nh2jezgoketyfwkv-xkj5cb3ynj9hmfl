@@ -5,3 +5,7 @@ target/
 .idea/
 **.DS_Store**
 *.prefs
+/data/project-1/justrentBIG.json
+/data/project-1/justreviewsBIG.json.json
+/data/project-1/justusersBIG.json
+/data/project-1/runwayBIG.json

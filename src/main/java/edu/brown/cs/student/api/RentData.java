@@ -37,15 +37,9 @@ public class RentData {
         Collections.addAll(this.rentSet, rents);
       }
     }
-    // Removes the null user from the set
-    User nullUser = new User();
-    rentSet.remove(nullUser);
-
-    //Prints each user's data
-    for (Rent rent: rentSet) {
-      System.out.println(rent.toString());
-    }
-    System.out.println(rentSet.size());
+    // Removes the null rent from the set
+    Rent nullRent = new Rent();
+    rentSet.remove(nullRent);
   }
 
   /**
