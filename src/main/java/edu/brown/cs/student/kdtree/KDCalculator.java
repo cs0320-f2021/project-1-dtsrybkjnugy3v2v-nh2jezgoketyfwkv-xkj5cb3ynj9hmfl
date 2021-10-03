@@ -4,8 +4,10 @@ import java.util.ArrayList;
 
 public class KDCalculator {
 
-  public KDCalculator() {
+  private final KDNode root;
 
+  public KDCalculator(KDNode root) {
+    this.root = root;
   }
 
   /**
@@ -70,7 +72,7 @@ public class KDCalculator {
    * @return
    */
 
-  public double findDistance(int x, int y, int z, int x2, int y2, int z2) {
+  public double findDistance(int x, int y, int z, int x2, int y2, int z2) { // todo: would storing this in an array be better?
     return Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2) + Math.pow(z - z2, 2));
   }
 }

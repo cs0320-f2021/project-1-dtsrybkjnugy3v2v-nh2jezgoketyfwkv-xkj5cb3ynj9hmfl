@@ -30,7 +30,7 @@ public class KDNode<T extends IKDInsertable> {
    * @return True if the Node is a Leaf and False if it is not
    */
   public boolean isLeaf() {
-    if(this.leftChild == null && this.rightChild==null){
+    if (this.leftChild == null && this.rightChild==null){
       return true;
     }
     return false;
@@ -74,6 +74,24 @@ public class KDNode<T extends IKDInsertable> {
 //        returnList.add(field.get(datum));
 //      }
 //    }
+  }
+
+  /**
+   * returns the node's left child
+   * @return
+   */
+
+  public KDNode getLeftChild() {
+    return this.leftChild;
+  }
+
+  /**
+   * returns the node's right child
+   * @return
+   */
+
+  public KDNode getRightChild() {
+    return this.rightChild;
   }
 
 }
