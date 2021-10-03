@@ -2,10 +2,15 @@ package edu.brown.cs.student.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
+import edu.brown.cs.student.kdtree.IKDInsertable;
 
 import java.io.Reader;
+import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class GsonParser {
   public User[] parseUser(String userJson) {
@@ -41,7 +46,7 @@ public class GsonParser {
     }
   }
 
-  public Rent[] openRentFile(String url) {
+  public List<IKDInsertable> openRentFile(String url) {
     try {
       Gson gson = new Gson();
 
@@ -52,7 +57,7 @@ public class GsonParser {
       Rent[] rent = gson.fromJson(reader, Rent[].class);
       // close reader
       reader.close();
-      return rent;
+      return Arrays.asList(rent);
 
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -60,7 +65,7 @@ public class GsonParser {
     }
   }
 
-  public User[] openUserFile(String url) {
+  public List<IKDInsertable> openUserFile(String url) {
     try {
       Gson gson = new Gson();
 
@@ -71,7 +76,7 @@ public class GsonParser {
       User[] users = gson.fromJson(reader, User[].class);
       // close reader
       reader.close();
-      return users;
+      return Arrays.asList(users);
 
     } catch (Exception ex) {
       return null;
@@ -79,7 +84,7 @@ public class GsonParser {
   }
 
 
-  public Review[] openReviewFile(String url) {
+  public List<IKDInsertable> openReviewFile(String url) {
     try {
       Gson gson = new Gson();
 
@@ -90,7 +95,7 @@ public class GsonParser {
       Review[] reviews = gson.fromJson(reader, Review[].class);
       // close reader
       reader.close();
-      return reviews;
+      return Arrays.asList(reviews);
 
     } catch (Exception ex) {
       return null;

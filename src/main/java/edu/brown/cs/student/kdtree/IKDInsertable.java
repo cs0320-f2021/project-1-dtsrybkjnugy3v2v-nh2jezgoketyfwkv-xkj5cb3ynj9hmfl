@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * inserted into a KDTree
  */
 public interface IKDInsertable {
+
   /**
    * method that returns all the parameters of the object that are numerical in
    * an array list

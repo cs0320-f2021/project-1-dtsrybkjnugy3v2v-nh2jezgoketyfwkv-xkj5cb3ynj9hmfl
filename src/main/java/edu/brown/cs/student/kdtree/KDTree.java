@@ -16,8 +16,7 @@ public class KDTree implements IKDTree{
    * constructor for the KDTree
    * @param data
    */
-  public KDTree(Collection<IKDInsertable> data) throws IllegalAccessException {
-    KDNode root = null;
+  public KDTree(Collection<IKDInsertable> data) {
     this.data = new ArrayList<>(data);
     KDNode firstNode = new KDNode(this.data.get(0));
     this.k = firstNode.getNumParams().size();

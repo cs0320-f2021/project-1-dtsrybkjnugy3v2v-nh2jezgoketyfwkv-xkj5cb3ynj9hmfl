@@ -8,6 +8,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
@@ -20,6 +21,8 @@ import edu.brown.cs.student.api.Review;
 import edu.brown.cs.student.api.ReviewData;
 import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserData;
+import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.KDTree;
 import edu.brown.cs.student.stars.MathBot;
 import edu.brown.cs.student.stars.NeighborCalculator;
 import edu.brown.cs.student.stars.Star;
@@ -143,8 +146,10 @@ public final class Main {
             case "users":
               // todo: load users data into a KDTree
               url = arguments[1];
-              User[] users = gsonParser.openUserFile(url);
-              for (User user: users) {
+              List<IKDInsertable> users = gsonParser.openUserFile(url);
+              KDTree userKDTree = new KDTree(users);
+              userKDTree.treeGenerator();
+              for (IKDInsertable user: users) {
                 System.out.println(user.toString());
               }
               break;
@@ -152,16 +157,17 @@ public final class Main {
             case "rent":
               // todo: load users data into a KDTree
               url = arguments[1];
-              Rent[] rents = gsonParser.openRentFile(url);
-              for (Rent rent: rents) {
+              List<IKDInsertable> rents = gsonParser.openRentFile(url);
+              KDTree rentKDTree = new KDTree(rents);
+              for (IKDInsertable rent: rents) {
                 System.out.println(rent.toString());
               }
               break;
             case "reviews":
               // todo: load users data into a KDTree
               url = arguments[1];
-              Review[] reviews = gsonParser.openReviewFile(url);
-              for (Review review: reviews) {
+              List<IKDInsertable> reviews = gsonParser.openReviewFile(url);
+              for (IKDInsertable review: reviews) {
                 System.out.println(review.toString());
               }
               break;

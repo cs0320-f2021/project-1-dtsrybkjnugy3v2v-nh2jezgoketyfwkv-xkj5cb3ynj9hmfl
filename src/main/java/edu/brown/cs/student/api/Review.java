@@ -1,12 +1,15 @@
 package edu.brown.cs.student.api;
 
+import edu.brown.cs.student.kdtree.IKDInsertable;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
  * This class is used for parsing json data. It is an outline af a user
  */
 
-public class Review {
+public class Review implements IKDInsertable {
   private String review_text;
   private String review_summary;
   private String review_date;
@@ -32,5 +35,14 @@ public class Review {
   @Override
   public int hashCode() {
     return Objects.hash(id);
+  }
+
+  /**
+   * method that returns all the parameters of the object that are numerical in
+   * an array list
+   */
+  @Override
+  public ArrayList returnNumParams() {
+    return null;
   }
 }

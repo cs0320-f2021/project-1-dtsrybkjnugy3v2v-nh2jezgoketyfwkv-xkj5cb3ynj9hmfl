@@ -1,11 +1,14 @@
 package edu.brown.cs.student.api;
 
+import edu.brown.cs.student.kdtree.IKDInsertable;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
  * This class is used for parsing json data. It is an outline af a user
  */
-public class User {
+public class User implements IKDInsertable {
   private long user_id;
   private String weight;
   private String bust_size;
@@ -38,5 +41,16 @@ public class User {
     return "User [id=" + user_id + ", weight=" + weight +  ", bust_size=" + bust_size + ", height="
         + height + ", age=" + age + ", body_type=" + body_type
         + ", horoscope=" + horoscope + "]";
+  }
+
+  /**
+   * method that returns all the parameters of the object that are numerical in
+   * an array list
+   */
+  @Override
+  public ArrayList returnNumParams() {
+    ArrayList<Double> returnList = new ArrayList<>();
+    returnList.add((double)this.age);
+    return returnList;
   }
 }

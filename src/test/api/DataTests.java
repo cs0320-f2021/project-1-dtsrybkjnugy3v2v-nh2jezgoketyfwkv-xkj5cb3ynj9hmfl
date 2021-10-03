@@ -7,8 +7,10 @@ import edu.brown.cs.student.api.Review;
 import edu.brown.cs.student.api.ReviewData;
 import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserData;
+import edu.brown.cs.student.kdtree.IKDInsertable;
 import org.junit.Test;
 
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.assertSame;
@@ -50,12 +52,12 @@ public class DataTests {
    */
   public void compareUserDataToFile(){
     GsonParser gsonParser = new GsonParser();
-    User[] users = gsonParser.openUserFile("data/project-1/justusersSMALL.json");
+    List<IKDInsertable> users = gsonParser.openUserFile("data/project-1/justusersSMALL.json");
     UserData userData = new UserData();
     userData.getData();
     Set<User> userSet = userData.getSet();
-    assertSame(userSet.size(), users.length);
-    for(User user: users){
+    assertSame(userSet.size(), users.size());
+    for(IKDInsertable user: users){
       assertTrue(userSet.contains(user));
     }
   }
@@ -67,12 +69,12 @@ public class DataTests {
    */
   public void compareReviewDataToFile(){
     GsonParser gsonParser = new GsonParser();
-    Review[] reviews = gsonParser.openReviewFile("data/project-1/justreviewsSMALL.json");
+    List<IKDInsertable> reviews = gsonParser.openReviewFile("data/project-1/justreviewsSMALL.json");
     ReviewData reviewData = new ReviewData();
     reviewData.getData();
     Set<Review> reviewSet = reviewData.getSet();
-    assertSame(reviewSet.size(), reviews.length);
-    for(Review review: reviews){
+    assertSame(reviewSet.size(), reviews.size());
+    for(IKDInsertable review: reviews){
       assertTrue(reviewSet.contains(review));
     }
   }
@@ -84,12 +86,12 @@ public class DataTests {
    */
   public void compareRentDataToFile(){
     GsonParser gsonParser = new GsonParser();
-    Rent[] rents = gsonParser.openRentFile("data/project-1/justrentSMALL.json");
+    List<IKDInsertable> rents = gsonParser.openRentFile("data/project-1/justrentSMALL.json");
     RentData rentData = new RentData();
     rentData.getData();
     Set<Rent> rentSet = rentData.getSet();
-    assertSame(rentSet.size(), rents.length);
-    for(Rent rent: rents){
+    assertSame(rentSet.size(), rents.size());
+    for(IKDInsertable rent: rents){
       assertTrue(rentSet.contains(rent));
     }
   }

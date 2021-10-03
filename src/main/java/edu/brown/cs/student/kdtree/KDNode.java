@@ -63,18 +63,17 @@ public class KDNode<T extends IKDInsertable> {
   /**
    * gathers together all the parameters of the data that are numbers and thus can be compared
    * @return
-   * @throws IllegalAccessException
    */
-  public ArrayList getNumParams() throws IllegalAccessException {
-    ArrayList returnList = new ArrayList();
-    Class classObj = datum.getClass();
-    Field[] fields = classObj.getDeclaredFields();
-    for(Field field: fields){
-      if(field.get(datum) instanceof Number){
-        returnList.add(field.get(datum));
-      }
-    }
+  public ArrayList<Double> getNumParams() {
+    ArrayList<Double> returnList = this.datum.returnNumParams();
     return returnList;
+    //    Class classObj = datum.getClass();
+//    Field[] fields = classObj.getDeclaredFields();
+//    for(Field field: fields){
+//      if(field.get(datum) instanceof Number){
+//        returnList.add(field.get(datum));
+//      }
+//    }
   }
 
 }
