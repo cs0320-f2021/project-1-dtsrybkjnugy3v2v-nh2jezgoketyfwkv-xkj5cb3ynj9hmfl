@@ -30,7 +30,7 @@ public class KDNode<T extends IKDInsertable> {
    * @return True if the Node is a Leaf and False if it is not
    */
   public boolean isLeaf() {
-    if(this.leftChild == null && this.rightChild==null){
+    if (this.leftChild == null && this.rightChild==null){
       return true;
     }
     return false;
@@ -69,8 +69,8 @@ public class KDNode<T extends IKDInsertable> {
     ArrayList returnList = new ArrayList();
     Class classObj = datum.getClass();
     Field[] fields = classObj.getDeclaredFields();
-    for(Field field: fields){
-      if(field.get(datum) instanceof Number){
+    for (Field field: fields){
+      if (field.get(datum) instanceof Number){
         returnList.add(field.get(datum));
       }
     }

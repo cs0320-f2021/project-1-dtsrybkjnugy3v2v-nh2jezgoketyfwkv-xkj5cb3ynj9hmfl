@@ -20,6 +20,7 @@ import edu.brown.cs.student.api.Review;
 import edu.brown.cs.student.api.ReviewData;
 import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserData;
+import edu.brown.cs.student.kdtree.KDTree;
 import edu.brown.cs.student.stars.MathBot;
 import edu.brown.cs.student.stars.NeighborCalculator;
 import edu.brown.cs.student.stars.Star;
