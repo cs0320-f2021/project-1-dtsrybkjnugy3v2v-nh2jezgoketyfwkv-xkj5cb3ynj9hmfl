@@ -75,23 +75,4 @@ public class KDNode<T extends IKDInsertable> {
 //      }
 //    }
   }
-
-  /**
-   * returns the node's left child
-   * @return
-   */
-
-  public KDNode getLeftChild() {
-    return this.leftChild;
-  }
-
-  /**
-   * returns the node's right child
-   * @return
-   */
-
-  public KDNode getRightChild() {
-    return this.rightChild;
-  }
-
 }
