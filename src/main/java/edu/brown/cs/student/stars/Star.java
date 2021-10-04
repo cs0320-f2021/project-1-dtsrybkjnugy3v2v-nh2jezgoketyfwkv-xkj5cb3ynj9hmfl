@@ -1,6 +1,10 @@
 package edu.brown.cs.student.stars;
 
-public class Star {
+import edu.brown.cs.student.kdtree.IKDInsertable;
+
+import java.util.ArrayList;
+
+public class Star implements IKDInsertable {
 
   private int _starID;
   private String _name;
@@ -44,5 +48,18 @@ public class Star {
   public void setDistance(double x2, double y2, double z2) {
     _distance = Math.sqrt(Math.pow((x2 - _x), 2)
         + Math.pow((y2 - _y), 2) + Math.pow((z2 - _z), 2));
+  }
+
+  /**
+   * method that returns all the parameters of the object that are numerical in
+   * an array list
+   */
+  @Override
+  public ArrayList returnNumParams() {
+    ArrayList returnList = new ArrayList<>();
+    returnList.add(this._x);
+    returnList.add(this._y);
+    returnList.add(this._z);
+    return returnList;
   }
 }

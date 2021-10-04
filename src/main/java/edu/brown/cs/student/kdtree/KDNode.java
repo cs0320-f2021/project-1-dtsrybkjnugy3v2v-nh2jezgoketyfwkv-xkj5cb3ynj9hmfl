@@ -1,7 +1,5 @@
 package edu.brown.cs.student.kdtree;
 
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class KDNode<T extends IKDInsertable> {
