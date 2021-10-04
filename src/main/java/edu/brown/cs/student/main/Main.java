@@ -188,8 +188,8 @@ public final class Main {
                   System.out.println(neighbor); // should print userID
                 }
               } else if (arguments.length == 5) {
-                int targetWeight = Integer.parseInt(arguments[2]);
-                int targetAge = Integer.parseInt(arguments[3]);
+                double targetWeight = Double.parseDouble(arguments[2]);
+                double targetAge = Double.parseDouble(arguments[3]);
                 kdCalc.findNearestNeighbors(numNeighbors, targetWeight, targetAge, this.root);
                 for (KDNode neighbor: kdCalc.getNeighbors()) {
                   System.out.println(neighbor); // should print userID

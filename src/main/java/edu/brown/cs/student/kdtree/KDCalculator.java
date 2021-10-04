@@ -23,10 +23,21 @@ public class KDCalculator {
   public void findNearestNeighbors(int k, User targetUser, KDNode currNode) {
     double weight = (double) targetUser.returnNumParams().get(0);
     double age = (double) targetUser.returnNumParams().get(1);
+    this.findNearestNeighbors(k, weight, age, currNode);
+  }
+
+  /**
+   * prints the k most similar users to a given weight, height, and age
+   * @param k the number of nearest nearest neighbors to find
+   * @param targetWeight the weight to find the nearest neighbors of. can be thought of as 'x'
+   * @param targetAge the age to find the nearest neighbors of. can be thought of as 'y'
+   * @param currNode the node which is currently being compared
+   */
+
+  public void findNearestNeighbors(int k, double targetWeight, double targetAge, KDNode currNode) {
     double neighborWeight = (double) currNode.getNumParams().get(0);
     double neighborAge = (double) currNode.getNumParams().get(1);
-    double distance = this.findDistance(weight, age, neighborWeight, neighborAge);
-    currNode.setDistance(distance);
+    double distance = this.findDistance(targetWeight, targetAge, neighborWeight, neighborAge);
 
     // adds the current  node to the list of nearest neighbors if the list is not full
     if (this.neighbors.size() < k) {
@@ -43,47 +54,47 @@ public class KDCalculator {
         i++;
       }
     }
-
+    // finds the relevant axis based on depth and sets that to the parameter to be compared
     int relevantAxis = currNode.getDepth() % k;
+    double relevantParam = targetWeight;
+    if (relevantAxis == 1) {
+      relevantParam = targetAge;
+    }
     this.neighbors.sort(new DistanceComparator());
     int numNeighbors = this.neighbors.size();
     double farthestDistance = this.neighbors.get(numNeighbors - 1).distance;
     double relevantDistance = (double) (currNode.getNumParams().get(relevantAxis))
-        - (double) (targetUser.returnNumParams().get(relevantAxis));
+        - relevantParam;
+
     // recurse if farthest neighbor is farther than the relevant axis of the target and current node
     if ((farthestDistance > relevantDistance || numNeighbors < k) && !currNode.isLeaf()) {
-      this.findNearestNeighbors(k, targetUser, currNode.leftChild);
-      this.findNearestNeighbors(k, targetUser, currNode.rightChild);
+      this.findNearestNeighbors(k, targetWeight, targetAge, currNode.leftChild);
+      this.findNearestNeighbors(k, targetWeight, targetAge, currNode.rightChild);
+
       // recurse on right child if target node's axis is greater than current node's
     } else if (relevantDistance < 0 && !currNode.isLeaf()) {
-      this.findNearestNeighbors(k, targetUser, currNode.rightChild);
+      this.findNearestNeighbors(k, targetWeight, targetAge, currNode.rightChild);
+
       // recurse on left child if target node's axis is less than current node's axis
     } else if (relevantDistance > 0 && !currNode.isLeaf()) {
-      this.findNearestNeighbors(k, targetUser, currNode.leftChild);
+      this.findNearestNeighbors(k, targetWeight, targetAge, currNode.leftChild);
     }
   }
 
+  /**
+   * returns a list of the nearest neighbors so that they can be printed by the REPL
+   * @return an arrayList of KDNodes that are nearest neighbors
+   */
   public ArrayList<KDNode> getNeighbors() {
     return this.neighbors;
   }
 
-  /**
-   * prints the k most similar users to a given weight, height, and age
-   * @param k the number of nearest nearest neighbors to find
-   * @param targetWeight the weight to find the nearest neighbors of. can be thought of as 'x'
-   * @param targetAge the age to find the nearest neighbors of. can be thought of as 'y'
-   * @param currNode the node which is currently being compared
-   */
-
-  public void findNearestNeighbors(int k, int targetWeight, int targetAge, KDNode currNode) {
-  }
 
   /**
    * prints the horoscope chart of the k most similar users to a given user
    * @param k the number of nearest neighbors to find and print horoscopes of
    * @param user the user whose neighbors we'd like to find
    */
-
   public void classifyUsers(int k, int user) {
   }
 
@@ -93,7 +104,6 @@ public class KDCalculator {
    * @param weight the weight to find the closest neighbors of. can be thought of as 'x'
    * @param age the age to find the closest neighbors of. can be thought of as 'y'
    */
-
   public void classifyUsers(int k, int weight, int age) {
 
   }
@@ -106,7 +116,6 @@ public class KDCalculator {
    * @param y2 the y-coordinate of the second point
    * @return
    */
-
   public double findDistance(double x, double y, double x2, double y2) {
     return Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2));
   }
