@@ -50,7 +50,16 @@ public class User implements IKDInsertable {
   @Override
   public ArrayList returnNumParams() {
     ArrayList<Double> returnList = new ArrayList<>();
-    returnList.add((double)this.age);
+    returnList.add((double) this.age);
+    returnList.add(weightToDouble());
     return returnList;
+  }
+
+  /**
+   * Method that converts the weight to a double and returns it
+   */
+  private double weightToDouble() {
+    String weightSubString = this.weight.substring(0, this.weight.length() - 3);
+    return Double.parseDouble(weightSubString);
   }
 }

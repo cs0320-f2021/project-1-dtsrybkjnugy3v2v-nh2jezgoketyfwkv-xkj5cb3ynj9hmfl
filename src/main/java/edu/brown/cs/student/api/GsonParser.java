@@ -5,10 +5,8 @@ import com.google.gson.JsonSyntaxException;
 import edu.brown.cs.student.kdtree.IKDInsertable;
 
 import java.io.Reader;
-import java.lang.reflect.Array;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -76,6 +74,9 @@ public class GsonParser {
       User[] users = gson.fromJson(reader, User[].class);
       // close reader
       reader.close();
+      for (IKDInsertable user: users) {
+        System.out.println(user.returnNumParams());
+      }
       return Arrays.asList(users);
 
     } catch (Exception ex) {
