@@ -22,6 +22,7 @@ import edu.brown.cs.student.api.ReviewData;
 import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserData;
 import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.KDCalculator;
 import edu.brown.cs.student.kdtree.KDNode;
 import edu.brown.cs.student.kdtree.KDTree;
 import edu.brown.cs.student.stars.MathBot;
@@ -177,6 +178,23 @@ public final class Main {
             case "similar":
               // todo: print out user_ids of the most similar k users
               System.out.println("k neighbors");
+              KDCalculator kdCalc = new KDCalculator(this.root);
+              int numNeighbors = Integer.parseInt(arguments[1]);
+              if (arguments.length == 3) {
+                int targetUserID = Integer.parseInt(arguments[2]);
+                // todo: find which user corresponds to userid
+                // kdCalc.findNearestNeighbors(numNeighbors, targetUser, this.root);
+                for (KDNode neighbor: kdCalc.getNeighbors()) {
+                  System.out.println(neighbor); // should print userID
+                }
+              } else if (arguments.length == 5) {
+                int targetWeight = Integer.parseInt(arguments[2]);
+                int targetAge = Integer.parseInt(arguments[3]);
+                kdCalc.findNearestNeighbors(numNeighbors, targetWeight, targetAge, this.root);
+                for (KDNode neighbor: kdCalc.getNeighbors()) {
+                  System.out.println(neighbor); // should print userID
+                }
+              }
               break;
             case "classify":
               // todo: print out horoscope comparison chart of the k most similar users

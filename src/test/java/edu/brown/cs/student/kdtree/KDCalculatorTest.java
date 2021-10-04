@@ -13,12 +13,27 @@ public class KDCalculatorTest {
 
   @Test
   public void findDistanceTest() {
-    KDCalculator kdcalc = new KDCalculator(null);
-    double output = kdcalc.findDistance(1,1,1,0,0,0);
-    assertEquals(output, 1.732051, 0.001);
-    output = kdcalc.findDistance(5, 3, 8, 1, 9, 3);
-    assertEquals(output, 8.774964, 0.001);
-    output = kdcalc.findDistance(0,0,0,0,0,0);
-    assertEquals(output, 0, 0);
+    KDCalculator KDCalc = new KDCalculator(null);
+    // simple tests with simple numbers
+    double output = KDCalc.findDistance(1,1,0,0);
+    assertEquals(output, 1.414214, 0.01);
+
+    output = KDCalc.findDistance(5, 3, 8, 1);
+    assertEquals(output, 3.605551, 0.01);
+
+    // tests with zero distance
+    output = KDCalc.findDistance(0,0,0,0);
+    assertEquals(output, 0, 0.01);
+
+    output = KDCalc.findDistance(32,75,32,75);
+    assertEquals(output, 0, 0.01);
+
+    // test with big numbers
+    output = KDCalc.findDistance(3534573, 35479, 67896578, 567824);
+    assertEquals(output, 64364206.503452, 0.01);
+
+    // test with doubles
+    output = KDCalc.findDistance(45.155, 235.235, 75.35, 856.23);
+    assertEquals(output, 621.728661, 0.01);
   }
 }

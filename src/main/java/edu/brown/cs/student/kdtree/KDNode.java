@@ -9,12 +9,14 @@ public class KDNode<T extends IKDInsertable> {
   private int depth;
   public KDNode leftChild;
   public KDNode rightChild;
+  public double distance;
 
   public KDNode(T datum) {
     this.datum = datum;
     this.depth=0;
     this.leftChild = null;
     this.rightChild = null;
+    this.distance = 0;
   }
 
   /**
@@ -74,5 +76,9 @@ public class KDNode<T extends IKDInsertable> {
 //        returnList.add(field.get(datum));
 //      }
 //    }
+  }
+
+  public void setDistance(double distance) {
+    this.distance = distance;
   }
 }

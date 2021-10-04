@@ -50,8 +50,8 @@ public class User implements IKDInsertable {
   @Override
   public ArrayList returnNumParams() {
     ArrayList<Double> returnList = new ArrayList<>();
-    returnList.add((double) this.age);
     returnList.add(weightToDouble());
+    returnList.add((double) this.age);
     return returnList;
   }
 
