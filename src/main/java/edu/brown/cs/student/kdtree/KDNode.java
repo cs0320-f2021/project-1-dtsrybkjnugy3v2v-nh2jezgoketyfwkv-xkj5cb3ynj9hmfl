@@ -30,7 +30,7 @@ public class KDNode<T extends IKDInsertable> {
    * @return True if the Node is a Leaf and False if it is not
    */
   public boolean isLeaf() {
-    if (this.leftChild == null && this.rightChild==null){
+    if (this.leftChild == null && this.rightChild == null){
       return true;
     }
     return false;
@@ -57,7 +57,7 @@ public class KDNode<T extends IKDInsertable> {
    * @return
    */
   public int increaseDepth() {
-    return this.depth +=1;
+    return this.depth += 1;
   }
 
   /**

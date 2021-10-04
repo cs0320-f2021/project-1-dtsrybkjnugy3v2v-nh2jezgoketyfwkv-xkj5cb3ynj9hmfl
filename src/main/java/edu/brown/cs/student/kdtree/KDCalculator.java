@@ -3,38 +3,41 @@ package edu.brown.cs.student.kdtree;
 import edu.brown.cs.student.api.User;
 
 import java.util.ArrayList;
+//import java.util.Set;
 
 public class KDCalculator {
 
-  private final KDNode root;
-  private ArrayList<KDNode> neighbors;
+  private ArrayList<KDNode<?>> neighbors;
+  //private final Set<User> users;
 
-  public KDCalculator(KDNode root) {
-    this.root = root;
+  //public KDCalculator(KDNode root, Set<User> users) {
+  public KDCalculator() {
     this.neighbors = new ArrayList<>();
+    //this.users = users;
   }
 
   /**
-   * prints the k most similar users as the given user
+   * prints the k most similar users as the given user.
    * @param k the number of nearest neighbors to find
    * @param targetUser the user whose neighbors we'd like to find
    * @param currNode the node which is currently being compared
    */
-  public void findNearestNeighbors(int k, User targetUser, KDNode currNode) {
+  public void findNearestNeighbors(int k, User targetUser, KDNode<?> currNode) {
     double weight = (double) targetUser.returnNumParams().get(0);
     double age = (double) targetUser.returnNumParams().get(1);
     this.findNearestNeighbors(k, weight, age, currNode);
   }
 
   /**
-   * prints the k most similar users to a given weight, height, and age
+   * prints the k most similar users to a given weight, height, and age.
    * @param k the number of nearest nearest neighbors to find
    * @param targetWeight the weight to find the nearest neighbors of. can be thought of as 'x'
    * @param targetAge the age to find the nearest neighbors of. can be thought of as 'y'
    * @param currNode the node which is currently being compared
    */
 
-  public void findNearestNeighbors(int k, double targetWeight, double targetAge, KDNode currNode) {
+  public void findNearestNeighbors(int k, double targetWeight,
+                                   double targetAge, KDNode<?> currNode) {
     double neighborWeight = (double) currNode.getNumParams().get(0);
     double neighborAge = (double) currNode.getNumParams().get(1);
     double distance = this.findDistance(targetWeight, targetAge, neighborWeight, neighborAge);
@@ -82,16 +85,16 @@ public class KDCalculator {
   }
 
   /**
-   * returns a list of the nearest neighbors so that they can be printed by the REPL
+   * returns a list of the nearest neighbors so that they can be printed by the REPL.
    * @return an arrayList of KDNodes that are nearest neighbors
    */
-  public ArrayList<KDNode> getNeighbors() {
+  public ArrayList<KDNode<?>> getNeighbors() {
     return this.neighbors;
   }
 
 
   /**
-   * prints the horoscope chart of the k most similar users to a given user
+   * prints the horoscope chart of the k most similar users to a given user.
    * @param k the number of nearest neighbors to find and print horoscopes of
    * @param user the user whose neighbors we'd like to find
    */
@@ -99,7 +102,7 @@ public class KDCalculator {
   }
 
   /**
-   * prints the horoscope chart of the k most similar users to a given weight, height, and age
+   * prints the horoscope chart of the k most similar users to a given weight, height, and age.
    * @param k the number of nearest neighbors to find and print horoscopes of
    * @param weight the weight to find the closest neighbors of. can be thought of as 'x'
    * @param age the age to find the closest neighbors of. can be thought of as 'y'
@@ -109,12 +112,12 @@ public class KDCalculator {
   }
 
   /**
-   * finds the Euclidean distance between two points in a two dimensional space
+   * finds the Euclidean distance between two points in a two dimensional space.
    * @param x the x-coordinate of the first point
    * @param y the y-coordinate of the first point
    * @param x2 the x-coordinate of the second point
    * @param y2 the y-coordinate of the second point
-   * @return
+   * @return the distance as a double
    */
   public double findDistance(double x, double y, double x2, double y2) {
     return Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2));

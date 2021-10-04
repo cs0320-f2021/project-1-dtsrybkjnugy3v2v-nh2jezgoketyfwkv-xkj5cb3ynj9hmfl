@@ -12,14 +12,9 @@ import java.util.List;
 import java.util.Map;
 
 import com.google.common.collect.ImmutableMap;
-
-import com.google.gson.Gson;
 import edu.brown.cs.student.api.GsonParser;
-import edu.brown.cs.student.api.Rent;
 import edu.brown.cs.student.api.RentData;
-import edu.brown.cs.student.api.Review;
 import edu.brown.cs.student.api.ReviewData;
-import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserData;
 import edu.brown.cs.student.kdtree.IKDInsertable;
 import edu.brown.cs.student.kdtree.KDCalculator;
@@ -46,9 +41,9 @@ public final class Main {
 
   // use port 4567 by default when running server
   private static final int DEFAULT_PORT = 4567;
-  private HashMap<String, Star> _stars;
-  private String _file;
-  private KDNode root;
+  private HashMap<String, Star> stars;
+  private String file;
+  private KDNode<?> root;
   //private HashMap<Star, String> _starsHM;
 
   /**
@@ -60,7 +55,7 @@ public final class Main {
     new Main(args).run();
   }
 
-  private String[] args;
+  private final String[] args;
 
   private Main(String[] args) {
     this.args = args;
@@ -106,27 +101,27 @@ public final class Main {
                       Double.parseDouble(arguments[2])));
               break;
             case "stars":
-              _file = arguments[1];
-              _stars = this.createStarList(_file);
+              this.file = arguments[1];
+              this.stars = this.createStarList(file);
               break;
             case "naive_neighbors":
               if (arguments.length == 5 && arguments[2].charAt(0) != '"') {
                 int numNeighbors = Integer.parseInt(arguments[1]);
-                System.out.println("Read " + _stars.size() + " from " + _file);
+                System.out.println("Read " + this.stars.size() + " from " + this.file);
                 double x = Double.parseDouble(arguments[2]);
                 double y = Double.parseDouble(arguments[3]);
                 double z = Double.parseDouble(arguments[4]);
-                NeighborCalculator neighborCalc = new NeighborCalculator(_stars);
+                NeighborCalculator neighborCalc = new NeighborCalculator(this.stars);
                 neighborCalc.nearest(numNeighbors, x, y, z);
               } else if (arguments.length >= 3) {
-                System.out.println("Read " + _stars.size() + " stars" + " from " + _file);
+                System.out.println("Read " + this.stars.size() + " stars" + " from " + this.file);
                 int numNeighbors = Integer.parseInt(arguments[1]);
                 StringBuilder starName = new StringBuilder();
                 // Concatenates name
                 for (int i = 2; i < arguments.length; i++) {
                   starName.append(" ").append(arguments[i]);
                 }
-                NeighborCalculator neighborCalc = new NeighborCalculator(_stars);
+                NeighborCalculator neighborCalc = new NeighborCalculator(this.stars);
                 neighborCalc.nearest(numNeighbors, starName.substring(2,
                     starName.toString().length() - 1).strip());
               }
@@ -178,7 +173,7 @@ public final class Main {
             case "similar":
               // todo: print out user_ids of the most similar k users
               System.out.println("k neighbors");
-              KDCalculator kdCalc = new KDCalculator(this.root);
+              KDCalculator kdCalc = new KDCalculator();
               int numNeighbors = Integer.parseInt(arguments[1]);
               if (arguments.length == 3) {
                 int targetUserID = Integer.parseInt(arguments[2]);
@@ -215,10 +210,10 @@ public final class Main {
   }
 
 
-  private HashMap<String, Star> createStarList(String file) {
-    _stars = new HashMap<>();
+  private HashMap<String, Star> createStarList(String starFile) {
+    this.stars = new HashMap<>();
     try {
-      BufferedReader br = new BufferedReader(new FileReader(file));
+      BufferedReader br = new BufferedReader(new FileReader(starFile));
       String input;
       br.readLine();
       while ((input = br.readLine()) != null) {
@@ -227,13 +222,13 @@ public final class Main {
         if (arguments[1].length() == 0) {
           arguments[1] = "Star ID: " + arguments[0];
         }
-        _stars.put(arguments[1], new Star(arguments[0], arguments[1],
+        this.stars.put(arguments[1], new Star(arguments[0], arguments[1],
             arguments[2], arguments[3], arguments[4]));
       }
     } catch (Exception e) {
       System.out.println("ERROR: File not found");
     }
-    return _stars;
+    return this.stars;
   }
 
   private static FreeMarkerEngine createEngine() {
