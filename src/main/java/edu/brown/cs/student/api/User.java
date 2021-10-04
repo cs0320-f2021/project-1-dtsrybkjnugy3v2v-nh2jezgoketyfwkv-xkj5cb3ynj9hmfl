@@ -55,11 +55,20 @@ public class User implements IKDInsertable {
     return returnList;
   }
 
+  @Override
+  public int returnID() {
+    return (int) user_id;
+  }
+
   /**
    * Method that converts the weight to a double and returns it
    */
   private double weightToDouble() {
     String weightSubString = this.weight.substring(0, this.weight.length() - 3);
     return Double.parseDouble(weightSubString);
+  }
+
+  public int getID() {
+    return (int) user_id;
   }
 }

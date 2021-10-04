@@ -45,4 +45,9 @@ public class Review implements IKDInsertable {
   public ArrayList returnNumParams() {
     return null;
   }
+
+  @Override
+  public int returnID() {
+    return 0;
+  }
 }

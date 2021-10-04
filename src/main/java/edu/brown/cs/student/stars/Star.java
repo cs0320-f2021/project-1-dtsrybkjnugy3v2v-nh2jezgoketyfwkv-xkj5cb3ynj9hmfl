@@ -62,4 +62,9 @@ public class Star implements IKDInsertable {
     returnList.add(this._z);
     return returnList;
   }
+
+  @Override
+  public int returnID() {
+    return _starID;
+  }
 }

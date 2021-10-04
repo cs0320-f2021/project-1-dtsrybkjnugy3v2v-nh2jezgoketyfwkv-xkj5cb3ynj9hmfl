@@ -13,5 +13,6 @@ public interface IKDInsertable {
    * method that returns all the parameters of the object that are numerical in
    * an array list
    */
-  public ArrayList returnNumParams();
+  ArrayList returnNumParams();
+  int returnID();
 }

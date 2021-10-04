@@ -15,6 +15,7 @@ import com.google.common.collect.ImmutableMap;
 import edu.brown.cs.student.api.GsonParser;
 import edu.brown.cs.student.api.RentData;
 import edu.brown.cs.student.api.ReviewData;
+import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserData;
 import edu.brown.cs.student.kdtree.IKDInsertable;
 import edu.brown.cs.student.kdtree.KDCalculator;
@@ -148,8 +149,10 @@ public final class Main {
               KDTree userKDTree = new KDTree(users);
               userKDTree.treeGenerator();
               this.root = userKDTree.getRoot();
+
+              HashMap<Integer, IKDInsertable> userHashMap = new HashMap<>();
               for (IKDInsertable user: users) {
-                System.out.println(user.toString());
+                userHashMap.put(user.returnID(), user);
               }
               break;
             // retrieves rent data at a given file location

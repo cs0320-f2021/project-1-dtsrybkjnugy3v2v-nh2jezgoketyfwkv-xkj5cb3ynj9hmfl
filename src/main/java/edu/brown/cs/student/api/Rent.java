@@ -50,5 +50,10 @@ public class Rent implements IKDInsertable {
     returnList.add((double)this.size);
     return returnList;
   }
+
+  @Override
+  public int returnID() {
+    return (int) this.user_id;
+  }
 }
 
