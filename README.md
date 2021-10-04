@@ -18,7 +18,8 @@
 
 ### Design Choices:
     The nearest neighbors algorithm utilizes the K-D tree to find similar users efficiently. 
-    The algorithm starts at the root node and compares the relevant axis of root to the same axis of the target 
-    user or to the corresponding target parameter. It then recurses on one of the children of the root and 
-    repeats the process until the list of nearest neighbors is populated with the most similar users. 
+    The algorithm starts at the root node and compares the relevant axis of root to the same axis of 
+    the target user or to the corresponding target parameter. It then recurses on one of the children 
+    of the root and repeats the process until the list of nearest neighbors is populated with the most 
+    similar users. 
     
