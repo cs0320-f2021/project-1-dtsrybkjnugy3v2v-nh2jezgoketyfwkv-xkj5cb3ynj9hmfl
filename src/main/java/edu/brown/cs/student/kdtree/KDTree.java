@@ -63,4 +63,8 @@ public class KDTree implements IKDTree {
 
   }
 
+  public KDNode getRoot() {
+    return root;
+  }
+
 }

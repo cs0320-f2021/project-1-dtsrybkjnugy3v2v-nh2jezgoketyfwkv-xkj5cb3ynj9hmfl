@@ -22,6 +22,7 @@ import edu.brown.cs.student.api.ReviewData;
 import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserData;
 import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.KDNode;
 import edu.brown.cs.student.kdtree.KDTree;
 import edu.brown.cs.student.stars.MathBot;
 import edu.brown.cs.student.stars.NeighborCalculator;
@@ -46,6 +47,7 @@ public final class Main {
   private static final int DEFAULT_PORT = 4567;
   private HashMap<String, Star> _stars;
   private String _file;
+  private KDNode root;
   //private HashMap<Star, String> _starsHM;
 
   /**
@@ -149,6 +151,7 @@ public final class Main {
               List<IKDInsertable> users = gsonParser.openUserFile(url);
               KDTree userKDTree = new KDTree(users);
               userKDTree.treeGenerator();
+              this.root = userKDTree.getRoot();
               for (IKDInsertable user: users) {
                 System.out.println(user.toString());
               }
