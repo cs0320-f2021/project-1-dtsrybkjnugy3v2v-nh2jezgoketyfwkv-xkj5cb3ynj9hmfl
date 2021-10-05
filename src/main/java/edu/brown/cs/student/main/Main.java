@@ -206,7 +206,6 @@ public final class Main {
                 double targetAge = Double.parseDouble(arguments[3]);
                 kdCalc2.classifyUsers(numNeighbors2, targetWeight, targetAge, this.root);
               }
-              System.out.println("horoscopes of k neighbors");
               break;
             default:
               System.out.println("ERROR: Invalid input for REPL");

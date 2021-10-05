@@ -110,6 +110,7 @@ public class KDCalculator {
    */
   public void classifyUsers(int k, User user, KDNode<User> root) {
     this.findNearestNeighbors(k, user, root);
+    this.constructHoroscopeChart(k);
   }
 
   /**
@@ -121,7 +122,7 @@ public class KDCalculator {
    */
   public void classifyUsers(int k, double weight, double age, KDNode<User> root) {
     this.findNearestNeighbors(k, weight, age, root);
-
+    this.constructHoroscopeChart(k);
   }
 
   /**
