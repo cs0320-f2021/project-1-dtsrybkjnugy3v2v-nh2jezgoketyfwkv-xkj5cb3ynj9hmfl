@@ -92,9 +92,10 @@ public class KDCalculator {
   /**
    * prints the horoscope chart of the k most similar users to a given user.
    * @param k the number of nearest neighbors to find and print horoscopes of
-   * @param user the user whose neighbors we'd like to find
+   * @param user the user whose neighbors we'd like to find.
+   * @param root the node of the tree which the nearest neighbors algorithm will start on
    */
-  public void classifyUsers(int k, int user) {
+  public void classifyUsers(int k, User user, KDNode<?> root) {
   }
 
   /**

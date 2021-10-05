@@ -175,8 +175,6 @@ public final class Main {
               }
               break;
             case "similar":
-              // todo: print out user_ids of the most similar k users
-              System.out.println("k neighbors");
               KDCalculator kdCalc = new KDCalculator();
               int numNeighbors = Integer.parseInt(arguments[1]);
               if (arguments.length == 3) {
@@ -184,19 +182,26 @@ public final class Main {
                 User targetUser = (User) this.userHashMap.get(targetUserID);
                 kdCalc.findNearestNeighbors(numNeighbors, targetUser, this.root);
                 for (KDNode<?> neighbor: kdCalc.getNeighbors()) {
-                  System.out.println(neighbor.getUserID()); // todo: should print userID
+                  System.out.println(neighbor.getUserID());
                 }
               } else if (arguments.length == 5) {
                 double targetWeight = Double.parseDouble(arguments[2]);
                 double targetAge = Double.parseDouble(arguments[3]);
                 kdCalc.findNearestNeighbors(numNeighbors, targetWeight, targetAge, this.root);
                 for (KDNode<?> neighbor: kdCalc.getNeighbors()) {
-                  System.out.println(neighbor.getUserID()); // todo: should print userID
+                  System.out.println(neighbor.getUserID());
                 }
               }
               break;
             case "classify":
+              KDCalculator kdCalc2 = new KDCalculator();
+              int numNeighbors2 = Integer.parseInt(arguments[1]);
               // todo: print out horoscope comparison chart of the k most similar users
+              if (arguments.length == 3) {
+                int targetUserID = Integer.parseInt(arguments[2]);
+                User targetUser = (User) this.userHashMap.get(targetUserID);
+                kdCalc2.classifyUsers(numNeighbors2, targetUser, this.root);
+              }
               System.out.println("horoscopes of k neighbors");
               break;
             default:
