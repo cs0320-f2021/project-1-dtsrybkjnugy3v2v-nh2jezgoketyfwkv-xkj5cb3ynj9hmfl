@@ -201,6 +201,10 @@ public final class Main {
                 int targetUserID = Integer.parseInt(arguments[2]);
                 User targetUser = (User) this.userHashMap.get(targetUserID);
                 kdCalc2.classifyUsers(numNeighbors2, targetUser, this.root);
+              } else if (arguments.length == 5) {
+                double targetWeight = Double.parseDouble(arguments[2]);
+                double targetAge = Double.parseDouble(arguments[3]);
+                kdCalc2.classifyUsers(numNeighbors2, targetWeight, targetAge, this.root);
               }
               System.out.println("horoscopes of k neighbors");
               break;

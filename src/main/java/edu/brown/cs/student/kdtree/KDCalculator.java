@@ -103,8 +103,9 @@ public class KDCalculator {
    * @param k the number of nearest neighbors to find and print horoscopes of
    * @param weight the weight to find the closest neighbors of. can be thought of as 'x'
    * @param age the age to find the closest neighbors of. can be thought of as 'y'
+   * @param root the node of the tree which the nearest neighbors algorithm will start on
    */
-  public void classifyUsers(int k, int weight, int age) {
+  public void classifyUsers(int k, double weight, double age, KDNode<?> root) {
 
   }
 
