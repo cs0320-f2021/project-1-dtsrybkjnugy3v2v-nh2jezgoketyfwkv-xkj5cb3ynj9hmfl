@@ -6,10 +6,23 @@ import java.util.ArrayList;
 
 public class KDCalculator {
 
-  private ArrayList<KDNode<?>> neighbors;
+  private ArrayList<KDNode<User>> neighbors;
+  private static final String[] horoscopes = new String[12];
 
   public KDCalculator() {
     this.neighbors = new ArrayList<>();
+    horoscopes[0] = "Aries";
+    horoscopes[1] = "Taurus";
+    horoscopes[2] = "Gemini";
+    horoscopes[3] = "Cancer";
+    horoscopes[4] = "Leo";
+    horoscopes[5] = "Virgo";
+    horoscopes[6] = "Libra";
+    horoscopes[7] = "Scorpio";
+    horoscopes[8] = "Sagittarius";
+    horoscopes[9] = "Capricorn";
+    horoscopes[10] = "Aquarius";
+    horoscopes[11] = "Pisces";
   }
 
   /**
@@ -18,7 +31,7 @@ public class KDCalculator {
    * @param targetUser the user whose neighbors we'd like to find
    * @param currNode the node which is currently being compared
    */
-  public void findNearestNeighbors(int k, User targetUser, KDNode<?> currNode) {
+  public void findNearestNeighbors(int k, User targetUser, KDNode<User> currNode) {
     double weight = (double) targetUser.returnNumParams().get(0);
     double age = (double) targetUser.returnNumParams().get(1);
     this.findNearestNeighbors(k, weight, age, currNode);
@@ -33,7 +46,7 @@ public class KDCalculator {
    */
 
   public void findNearestNeighbors(int k, double targetWeight,
-                                   double targetAge, KDNode<?> currNode) {
+                                   double targetAge, KDNode<User> currNode) {
     double neighborWeight = currNode.getNumParams().get(0);
     double neighborAge = currNode.getNumParams().get(1);
     double distance = this.findDistance(targetWeight, targetAge, neighborWeight, neighborAge);
@@ -62,7 +75,7 @@ public class KDCalculator {
     this.neighbors.sort(new DistanceComparator());
     int numNeighbors = this.neighbors.size();
     double farthestDistance = this.neighbors.get(numNeighbors - 1).distance;
-    double relevantDistance = (double) (currNode.getNumParams().get(relevantAxis))
+    double relevantDistance = currNode.getNumParams().get(relevantAxis)
         - relevantParam;
 
     // recurse if farthest neighbor is farther than the relevant axis of the target and current node
@@ -84,7 +97,7 @@ public class KDCalculator {
    * returns a list of the nearest neighbors so that they can be printed by the REPL.
    * @return an arrayList of KDNodes that are nearest neighbors
    */
-  public ArrayList<KDNode<?>> getNeighbors() {
+  public ArrayList<KDNode<User>> getNeighbors() {
     return this.neighbors;
   }
 
@@ -95,7 +108,8 @@ public class KDCalculator {
    * @param user the user whose neighbors we'd like to find.
    * @param root the node of the tree which the nearest neighbors algorithm will start on
    */
-  public void classifyUsers(int k, User user, KDNode<?> root) {
+  public void classifyUsers(int k, User user, KDNode<User> root) {
+    this.findNearestNeighbors(k, user, root);
   }
 
   /**
@@ -105,7 +119,8 @@ public class KDCalculator {
    * @param age the age to find the closest neighbors of. can be thought of as 'y'
    * @param root the node of the tree which the nearest neighbors algorithm will start on
    */
-  public void classifyUsers(int k, double weight, double age, KDNode<?> root) {
+  public void classifyUsers(int k, double weight, double age, KDNode<User> root) {
+    this.findNearestNeighbors(k, weight, age, root);
 
   }
 
@@ -119,5 +134,25 @@ public class KDCalculator {
    */
   public double findDistance(double x, double y, double x2, double y2) {
     return Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2));
+  }
+
+  private void constructHoroscopeChart(int numNeighbors) {
+    int[] horoscopeChart = new int[12]; // todo: should create Constant variable
+    for (int i = 0; i < numNeighbors; i++) {
+      User user = this.neighbors.get(i).datum;
+      String horoscope = user.getHoroscope();
+      for (int j = 0; j < horoscopes.length; j++) {
+        if (horoscopes[j].equals(horoscope)) {
+          horoscopeChart[j] = horoscopeChart[j]++;
+        }
+      }
+    }
+    this.printHoroscopeChart(horoscopeChart);
+  }
+
+  private void printHoroscopeChart(int[] horoscopeChart) {
+    for (int i = 0; i < horoscopeChart.length; i++) {
+      System.out.println(horoscopes[i] + ": " + horoscopeChart[i]);
+    }
   }
 }

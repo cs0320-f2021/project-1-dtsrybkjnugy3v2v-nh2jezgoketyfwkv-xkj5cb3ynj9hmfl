@@ -3,7 +3,7 @@ package edu.brown.cs.student.kdtree;
 import java.util.ArrayList;
 
 public class KDNode<T extends IKDInsertable> {
-  private T datum;
+  public T datum;
   private int depth;
   public KDNode leftChild;
   public KDNode rightChild;

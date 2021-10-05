@@ -44,7 +44,7 @@ public class User implements IKDInsertable {
   }
 
   /**
-   * method that returns all the parameters of the object that are numerical in
+   * method that returns all the parameters of the object that are numerical in.
    * an array list
    */
   @Override
@@ -61,7 +61,7 @@ public class User implements IKDInsertable {
   }
 
   /**
-   * Method that converts the weight to a double and returns it
+   * Method that converts the weight to a double and returns it.
    */
   private double weightToDouble() {
     String weightSubString = this.weight.substring(0, this.weight.length() - 3);
@@ -70,5 +70,14 @@ public class User implements IKDInsertable {
 
   public int getID() {
     return (int) user_id;
+  }
+
+  /**
+   * used for the classify command. called by KDCalculator in order
+   * to create a horoscope chart
+   * @return a string that represents the user's horoscope
+   */
+  public String getHoroscope() {
+    return this.horoscope;
   }
 }

@@ -44,7 +44,7 @@ public final class Main {
   private static final int DEFAULT_PORT = 4567;
   private HashMap<String, Star> stars;
   private String file;
-  private KDNode<?> root;
+  private KDNode<User> root;
   private HashMap<Integer, IKDInsertable> userHashMap;
   //private HashMap<Star, String> _starsHM;
 
