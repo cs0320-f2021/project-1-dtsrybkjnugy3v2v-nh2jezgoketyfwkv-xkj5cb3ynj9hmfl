@@ -8,6 +8,7 @@ public class KDNode<T extends IKDInsertable> {
   public KDNode leftChild;
   public KDNode rightChild;
   public double distance;
+  private int userID;
 
   public KDNode(T datum) {
     this.datum = datum;
@@ -15,6 +16,7 @@ public class KDNode<T extends IKDInsertable> {
     this.leftChild = null;
     this.rightChild = null;
     this.distance = 0;
+    this.userID = datum.returnID();
   }
 
   /**
@@ -76,7 +78,17 @@ public class KDNode<T extends IKDInsertable> {
 //    }
   }
 
+  /**
+   * method called by KDCalculator that stores the Euclidean distance of this node
+   * to the target point.
+   * @param distance calculated by KDCalculator
+   */
+
   public void setDistance(double distance) {
     this.distance = distance;
+  }
+
+  public int getUserID() {
+    return this.userID;
   }
 }

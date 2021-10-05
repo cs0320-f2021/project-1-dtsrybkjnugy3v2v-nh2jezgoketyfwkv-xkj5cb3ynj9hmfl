@@ -3,17 +3,13 @@ package edu.brown.cs.student.kdtree;
 import edu.brown.cs.student.api.User;
 
 import java.util.ArrayList;
-//import java.util.Set;
 
 public class KDCalculator {
 
   private ArrayList<KDNode<?>> neighbors;
-  //private final Set<User> users;
 
-  //public KDCalculator(KDNode root, Set<User> users) {
   public KDCalculator() {
     this.neighbors = new ArrayList<>();
-    //this.users = users;
   }
 
   /**
@@ -38,8 +34,8 @@ public class KDCalculator {
 
   public void findNearestNeighbors(int k, double targetWeight,
                                    double targetAge, KDNode<?> currNode) {
-    double neighborWeight = (double) currNode.getNumParams().get(0);
-    double neighborAge = (double) currNode.getNumParams().get(1);
+    double neighborWeight = currNode.getNumParams().get(0);
+    double neighborAge = currNode.getNumParams().get(1);
     double distance = this.findDistance(targetWeight, targetAge, neighborWeight, neighborAge);
 
     // adds the current  node to the list of nearest neighbors if the list is not full

@@ -45,6 +45,7 @@ public final class Main {
   private HashMap<String, Star> stars;
   private String file;
   private KDNode<?> root;
+  private HashMap<Integer, IKDInsertable> userHashMap;
   //private HashMap<Star, String> _starsHM;
 
   /**
@@ -150,9 +151,9 @@ public final class Main {
               userKDTree.treeGenerator();
               this.root = userKDTree.getRoot();
 
-              HashMap<Integer, IKDInsertable> userHashMap = new HashMap<>();
+              this.userHashMap = new HashMap<>();
               for (IKDInsertable user: users) {
-                userHashMap.put(user.returnID(), user);
+                this.userHashMap.put(user.returnID(), user);
               }
               break;
             // retrieves rent data at a given file location
@@ -180,17 +181,17 @@ public final class Main {
               int numNeighbors = Integer.parseInt(arguments[1]);
               if (arguments.length == 3) {
                 int targetUserID = Integer.parseInt(arguments[2]);
-                // todo: find which user corresponds to userid
-                // kdCalc.findNearestNeighbors(numNeighbors, targetUser, this.root);
-                for (KDNode neighbor: kdCalc.getNeighbors()) {
-                  System.out.println(neighbor); // should print userID
+                User targetUser = (User) this.userHashMap.get(targetUserID);
+                kdCalc.findNearestNeighbors(numNeighbors, targetUser, this.root);
+                for (KDNode<?> neighbor: kdCalc.getNeighbors()) {
+                  System.out.println(neighbor.getUserID()); // todo: should print userID
                 }
               } else if (arguments.length == 5) {
                 double targetWeight = Double.parseDouble(arguments[2]);
                 double targetAge = Double.parseDouble(arguments[3]);
                 kdCalc.findNearestNeighbors(numNeighbors, targetWeight, targetAge, this.root);
-                for (KDNode neighbor: kdCalc.getNeighbors()) {
-                  System.out.println(neighbor); // should print userID
+                for (KDNode<?> neighbor: kdCalc.getNeighbors()) {
+                  System.out.println(neighbor.getUserID()); // todo: should print userID
                 }
               }
               break;
