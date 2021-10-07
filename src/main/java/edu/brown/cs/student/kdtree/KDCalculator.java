@@ -50,19 +50,19 @@ public class KDCalculator {
     double neighborWeight = currNode.getNumParams().get(0);
     double neighborAge = currNode.getNumParams().get(1);
     double distance = this.findDistance(targetWeight, targetAge, neighborWeight, neighborAge);
-
-    System.out.println("Current Node: " + currNode.getUserID()); // todo - delete
+    currNode.setDistance(distance);
 
     // adds the current  node to the list of nearest neighbors if the list is not full
     if (this.neighbors.size() < k) {
       this.neighbors.add(currNode);
+
     } else { // else, current node is added to the list if it is closer than a node in the list
       boolean inserted = false;
       int i = 0;
       while (!inserted && i < k) {
         if (distance < this.neighbors.get(i).distance) {
           this.neighbors.remove(i);
-          this.neighbors.add(currNode);
+          this.neighbors.add(i, currNode);
           inserted = true;
         }
         i++;
@@ -146,12 +146,9 @@ public class KDCalculator {
       String horoscope = user.getHoroscope();
       for (int j = 0; j < horoscopes.length; j++) {
         if (horoscopes[j].equals(horoscope)) {
-          System.out.println("Horoscope from array list: " + horoscopes[j]); // todo - delete
-          System.out.println("Horoscope: " + horoscope); // todo - delete
           int currCount = horoscopeChart[j];
           currCount += 1;
           horoscopeChart[j] = currCount;
-          System.out.println("Count: " + horoscopeChart[j]); // todo - delete
         }
       }
     }

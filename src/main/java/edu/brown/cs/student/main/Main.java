@@ -184,7 +184,7 @@ public final class Main {
                 for (KDNode<?> neighbor: kdCalc.getNeighbors()) {
                   System.out.println(neighbor.getUserID());
                 }
-              } else if (arguments.length == 5) {
+              } else if (arguments.length == 4) {
                 double targetWeight = Double.parseDouble(arguments[2]);
                 double targetAge = Double.parseDouble(arguments[3]);
                 kdCalc.findNearestNeighbors(numNeighbors, targetWeight, targetAge, this.root);
@@ -201,7 +201,7 @@ public final class Main {
                 int targetUserID = Integer.parseInt(arguments[2]);
                 User targetUser = (User) this.userHashMap.get(targetUserID);
                 kdCalc2.classifyUsers(numNeighbors2, targetUser, this.root);
-              } else if (arguments.length == 5) {
+              } else if (arguments.length == 4) {
                 double targetWeight = Double.parseDouble(arguments[2]);
                 double targetAge = Double.parseDouble(arguments[3]);
                 kdCalc2.classifyUsers(numNeighbors2, targetWeight, targetAge, this.root);
