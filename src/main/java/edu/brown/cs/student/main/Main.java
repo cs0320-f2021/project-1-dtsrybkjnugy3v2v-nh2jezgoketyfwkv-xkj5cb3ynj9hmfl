@@ -148,7 +148,7 @@ public final class Main {
               url = arguments[1];
               List<IKDInsertable> users = gsonParser.openUserFile(url);
               KDTree userKDTree = new KDTree(users);
-              userKDTree.treeGenerator();
+              //userKDTree.treeGenerator();
               this.root = userKDTree.getRoot();
 
               this.userHashMap = new HashMap<>();

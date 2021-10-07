@@ -15,7 +15,7 @@ public class KDTreeNodeTest {
   /**
    * tests the getDepth and increaseDepth methods in KDNode Class
    */
-  public void testDepth() {
+  public void testDepth() throws IllegalAccessException {
     Star testStar = new Star("0","Sun","2","3","4.3");
     KDNode testNode = new KDNode(testStar);
     assertSame(testNode.getDepth(), 0);
@@ -27,7 +27,7 @@ public class KDTreeNodeTest {
   /**
    * test the IsLeaf, addRightChild, and addLeftChild method of KDNode
    */
-  public void testChildren(){
+  public void testChildren() throws IllegalAccessException {
     Star testStar = new Star("0","Sun","2.1","3.0","4.3");
     Star testStar2 = new Star("1","Mun","3.1","10.0","4.3");
     KDNode testNode = new KDNode(testStar);
@@ -45,7 +45,7 @@ public class KDTreeNodeTest {
   /**
    * tests the getNumParams method of KDNode class
    */
-  public void testGetNumParams() {
+  public void testGetNumParams() throws IllegalAccessException {
     Star testStar = new Star("0","Sun","2.1","3.0","4.3");
     KDNode testNode = new KDNode(testStar);
     ArrayList<Double> returnList = testNode.getNumParams();

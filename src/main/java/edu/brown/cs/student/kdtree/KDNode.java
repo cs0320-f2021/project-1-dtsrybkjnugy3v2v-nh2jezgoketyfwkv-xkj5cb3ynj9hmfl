@@ -1,5 +1,6 @@
 package edu.brown.cs.student.kdtree;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 public class KDNode<T extends IKDInsertable> {
@@ -9,14 +10,26 @@ public class KDNode<T extends IKDInsertable> {
   public KDNode rightChild;
   public double distance;
   private int userID;
+  private ArrayList<Double> fieldValues;
 
-  public KDNode(T datum) {
+  public KDNode(T datum) throws IllegalAccessException {
     this.datum = datum;
-    this.depth=0;
+    this.depth = 0;
     this.leftChild = null;
     this.rightChild = null;
     this.distance = 0;
     this.userID = datum.returnID();
+    Class classObj = this.datum.getClass();
+    Field[] allFields = classObj.getDeclaredFields();
+    for (Field field : allFields) {
+      if (field.get(datum) instanceof Double) {
+        this.fieldValues.add((Double)field.get(datum));
+      }
+    }
+  }
+
+  public ArrayList getFieldValues() {
+    return this.fieldValues;
   }
 
   /**
@@ -69,13 +82,6 @@ public class KDNode<T extends IKDInsertable> {
   public ArrayList<Double> getNumParams() {
     ArrayList<Double> returnList = this.datum.returnNumParams();
     return returnList;
-    //    Class classObj = datum.getClass();
-//    Field[] fields = classObj.getDeclaredFields();
-//    for(Field field: fields){
-//      if(field.get(datum) instanceof Number){
-//        returnList.add(field.get(datum));
-//      }
-//    }
   }
 
   /**
