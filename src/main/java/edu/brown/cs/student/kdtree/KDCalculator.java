@@ -57,7 +57,7 @@ public class KDCalculator {
     } else { // else, current node is added to the list if it is closer than a node in the list
       boolean inserted = false;
       int i = 0;
-      while (!inserted || i < k) {
+      while (!inserted && i < k) {
         if (distance < this.neighbors.get(i).distance) {
           this.neighbors.remove(i);
           this.neighbors.add(currNode);

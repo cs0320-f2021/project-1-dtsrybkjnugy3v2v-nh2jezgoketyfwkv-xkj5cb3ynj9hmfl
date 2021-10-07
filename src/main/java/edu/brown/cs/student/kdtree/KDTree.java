@@ -13,7 +13,7 @@ public class KDTree implements IKDTree {
   private Field[] fields;
 
   /**
-   * constructor for the KDTree
+   * constructor for the KDTree.
    * @param data
    */
   public KDTree(Collection<IKDInsertable> data) throws IllegalAccessException {
@@ -22,25 +22,25 @@ public class KDTree implements IKDTree {
     this.k = firstNode.getNumParams().size();
     Class classObj = this.data.get(0).getClass();
     this.fields = classObj.getDeclaredFields();
-    this.root = treeGenerator(this.data,0);
+    this.root = treeGenerator(this.data, 0);
   }
 
   /**
-   * populates the tree
+   * populates the tree.
    */
   public KDNode treeGenerator(List<IKDInsertable> unsortedData, int depth) throws IllegalAccessException {
-    if(unsortedData.size()==0){
+    if (unsortedData.size() == 0){
       return null;
     }
     else {
       sortData(unsortedData, depth);
       int dataSize = unsortedData.size();
-      IKDInsertable median = unsortedData.get((int)dataSize/2);//will need to cast as int in case size it odd number
-      List leftList = unsortedData.subList(0,dataSize/2);
-      List rightList = unsortedData.subList((dataSize/2)+1, unsortedData.size());
+      IKDInsertable median = unsortedData.get((int) dataSize / 2); //will need to cast as int in case size it odd number
+      List leftList = unsortedData.subList(0, dataSize / 2);
+      List rightList = unsortedData.subList((dataSize / 2) + 1, unsortedData.size());
       KDNode newRoot = new KDNode(median);
-      newRoot.addLeftChild(treeGenerator(leftList, (depth + 1)%k));
-      newRoot.addRightChild(treeGenerator(rightList, (depth + 1)%k));
+      newRoot.addLeftChild(treeGenerator(leftList, (depth + 1) % k));
+      newRoot.addRightChild(treeGenerator(rightList, (depth + 1) % k));
       return newRoot;
     }
   }
@@ -105,8 +105,8 @@ public class KDTree implements IKDTree {
       @Override
       public int compare(IKDInsertable o1, IKDInsertable o2) {
         int nodeDepth = depth;
-        Double compareValue1 = (Double) o1.returnNumParams().get(k%nodeDepth);
-        Double compareValue2 = (Double) o2.returnNumParams().get(k%nodeDepth);
+        Double compareValue1 = (Double) o1.returnNumParams().get(nodeDepth % k);
+        Double compareValue2 = (Double) o2.returnNumParams().get(nodeDepth % k);
         return compareValue2.compareTo(compareValue1);
       }
     }
@@ -116,7 +116,7 @@ public class KDTree implements IKDTree {
 
 
   /**
-   * returns the root node of the tree
+   * returns the root node of the tree.
    * @return
    */
   public KDNode getRoot() {
