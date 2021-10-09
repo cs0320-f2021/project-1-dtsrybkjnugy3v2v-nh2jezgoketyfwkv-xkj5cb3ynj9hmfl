@@ -17,4 +17,12 @@ public class ClientRequestGenerator {
         .uri(URI.create(reqUri))
         .build();
   }
+  public static HttpRequest getPostRequest(String reqUri) {
+    String apiKey = ClientAuth.getApiKey();
+    return HttpRequest.newBuilder()
+        .POST(HttpRequest.BodyPublishers.ofString("{\"auth\":\"" + "csims" + "\"}"))
+        .header("x-api-key", apiKey)
+        .uri(URI.create(reqUri))
+        .build();
+  }
 }

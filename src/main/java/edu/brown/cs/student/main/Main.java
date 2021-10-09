@@ -17,6 +17,7 @@ import edu.brown.cs.student.api.RentData;
 import edu.brown.cs.student.api.ReviewData;
 import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserData;
+import edu.brown.cs.student.api.UserResponseData;
 import edu.brown.cs.student.kdtree.IKDInsertable;
 import edu.brown.cs.student.kdtree.KDCalculator;
 import edu.brown.cs.student.kdtree.KDNode;
@@ -137,6 +138,10 @@ public final class Main {
             case "reviewGet":
               ReviewData reviewData = new ReviewData();
               reviewData.getData();
+              break;
+            case "responseGet":
+              UserResponseData userResponseData = new UserResponseData();
+              userResponseData.getData();
               break;
             // Gathers rent objects from the api data
             case "rentGet":

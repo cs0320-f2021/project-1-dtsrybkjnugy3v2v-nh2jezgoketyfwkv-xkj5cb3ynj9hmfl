@@ -11,6 +11,16 @@ import java.util.Arrays;
 import java.util.List;
 
 public class GsonParser {
+  public UserResponse[] parseUserResponse(String userResponseJson) {
+    Gson gson = new Gson();
+    // Catches errors that arise from potential type mismatches
+    // If an error occurs at a given uri, skip and go to the next one
+    try {
+      return gson.fromJson(userResponseJson, UserResponse[].class);
+    } catch (JsonSyntaxException e) {
+      return null;
+    }
+  }
   public User[] parseUser(String userJson) {
     Gson gson = new Gson();
     // Catches errors that arise from potential type mismatches
