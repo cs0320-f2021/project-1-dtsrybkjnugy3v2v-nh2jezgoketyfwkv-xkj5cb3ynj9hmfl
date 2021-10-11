@@ -22,4 +22,24 @@
     the target user or to the corresponding target parameter. It then recurses on one of the children 
     of the root and repeats the process until the list of nearest neighbors is populated with the most 
     similar users. 
+
+### Questions:
+    Based on the findings of the study, one can conclude that biases against certain demographics 
+    can come from within the person itself in the absence of outside manipulation. The study done 
+    by the National Bureau on Economic Development reveals that women often rate their abilities 
+    in certain areas (particularly STEM areas) as lower than that of men, even the they perform just 
+    as well. This result is probably due to deeply integrated societal expectations that come out 
+    unconsciously when women are asked to rate their own abilities. Starting at a young age, expectations 
+    for gender can be subliminally enforced. For example, girls are expected to play with dolls and make 
+    up while boys are expected to like computers and gaming. This early exposure to technology in boys 
+    not only lends itself to a more adept maneuvering of the field, but also a greater sense of confidence, 
+    both of which are often absent in young girls. 
+
+	In light of this study, one is forced to consider what other minorities are similarly influenced. 
+    Other minority groups that we have considered that may also be vulnerable to self-inflicted biases 
+    are people of color, such as African Americans and people of Latin American heritage, people of 
+    lower socio-economic class, and people with disabilities. Our matchmaker’s results may consistently 
+    rate these people as “of lower tier,” and perhaps consistently match them with people of “similar ability,” 
+    thus perpetuating their sense of inadequacy into the future. Said teams may achieve less than their 
+    “higher tier” counterparts, not because of inherent ability, but because of self-perceived limits.
     
