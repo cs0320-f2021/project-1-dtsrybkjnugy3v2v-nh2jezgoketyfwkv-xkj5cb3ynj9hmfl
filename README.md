@@ -42,4 +42,9 @@
     rate these people as “of lower tier,” and perhaps consistently match them with people of “similar ability,” 
     thus perpetuating their sense of inadequacy into the future. Said teams may achieve less than their 
     “higher tier” counterparts, not because of inherent ability, but because of self-perceived limits.
+
+    To circumvent these effects, we as designers of our reccomender should be concious
+    of what kind of data we should be scouting for "nearest neighbors" and what kind of data
+    should we not do that. In terms of working habits and availibility, finding neighbors
+    would be ideal, but for strengths and weaknesses, differing levels should be balanced out.
     
