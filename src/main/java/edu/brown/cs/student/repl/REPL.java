@@ -5,14 +5,20 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 
 public class REPL {
+
+  /**
+   * The REPL! instantiated by Main and does not need to be edited by other engineers.
+   * Stores a map of executable commands.
+   */
   public REPL() {
-    HashMap<String, Command> commandsMap = this.listCommands();
+    HashMap<String, Command> commandsMap = this.mapCommands();
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       String input;
       while ((input = br.readLine()) != null) {
         try {
           input = input.trim();
           String[] arguments = input.split(" ");
+          // finds which command to run based on the string input from the map and runs it
           commandsMap.get(arguments[0]).runCommand(arguments);
         } catch (Exception e) {
           e.printStackTrace();
@@ -24,7 +30,15 @@ public class REPL {
     }
   }
 
-  private HashMap<String, Command> listCommands() {
+  /**
+   * Creates a hashmap of the commands that the repl recognizes and can run.
+   * This is where other engineers can add/delete their own commands.
+   * A hashset is used instead of a list so that the repl can easily
+   * find which command to run based on the string input.
+   * @return a hashmap of the commands to run
+   */
+
+  private HashMap<String, Command> mapCommands() {
     HashMap<String, Command> commands = new HashMap<>();
     Users usersCommand = new Users();
     commands.put(usersCommand.getCommand(), usersCommand);
