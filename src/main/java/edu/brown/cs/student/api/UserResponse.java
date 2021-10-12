@@ -57,6 +57,9 @@ public class UserResponse implements IKDInsertable {
     System.out.println(skills);
   }
 
+  //TODO Store entire array instead of first
+  //TODO seperate meeting times
+
   public void setNegativeTraits() throws SQLException, ClassNotFoundException, InvocationTargetException,
       InstantiationException, IllegalAccessException, NoSuchMethodException {
     database = new Database("data/project-1/integration.sqlite3");

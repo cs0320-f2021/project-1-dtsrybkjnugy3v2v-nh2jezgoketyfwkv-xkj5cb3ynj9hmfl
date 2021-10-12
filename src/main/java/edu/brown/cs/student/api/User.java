@@ -52,6 +52,7 @@ public class User implements IKDInsertable {
     ArrayList<Double> returnList = new ArrayList<>();
     returnList.add(weightToDouble());
     returnList.add((double) this.age);
+    returnList.add(heightToDouble());
     return returnList;
   }
 
@@ -66,6 +67,14 @@ public class User implements IKDInsertable {
   private double weightToDouble() {
     String weightSubString = this.weight.substring(0, this.weight.length() - 3);
     return Double.parseDouble(weightSubString);
+  }
+
+  private double heightToDouble() {
+    this.height = this.height.replace("\"", "");
+    this.height = this.height.replace("'", "");
+    int feet = Integer.parseInt(this.height.substring(0, 1).strip());
+    int inches = Integer.parseInt(this.height.substring(1).strip());
+    return 12 * feet + inches;
   }
 
   public int getID() {
