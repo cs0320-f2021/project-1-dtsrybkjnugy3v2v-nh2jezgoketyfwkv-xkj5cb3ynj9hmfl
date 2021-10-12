@@ -1,7 +1,5 @@
 package edu.brown.cs.student.repl;
 
-import edu.brown.cs.student.api.GsonParser;
-
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -9,9 +7,6 @@ import java.util.List;
 
 public class REPL {
   public REPL() {
-    // Set up global variables
-    String url;
-    GsonParser gsonParser = new GsonParser();
     List<Command> commandsList = this.listCommands();
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       String input;
