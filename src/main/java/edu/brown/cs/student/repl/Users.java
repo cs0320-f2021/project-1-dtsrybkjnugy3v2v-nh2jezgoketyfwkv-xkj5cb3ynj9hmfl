@@ -26,8 +26,6 @@ public class Users implements Command {
     GsonParser gsonParser = new GsonParser();
     List<IKDInsertable> users = gsonParser.openUserFile(url);
     KDTree userKDTree = new KDTree(users);
-    System.out.println("From Users Run: " + userKDTree.getRoot());
-    this.getRoot();
     this.root = userKDTree.getRoot();
     this.userHashMap = new HashMap<>();
     for (IKDInsertable user : users) {
@@ -36,7 +34,6 @@ public class Users implements Command {
   }
 
   public KDNode getRoot() {
-    System.out.println("getRoot from Users: " + this.root);
     return this.root;
   }
 

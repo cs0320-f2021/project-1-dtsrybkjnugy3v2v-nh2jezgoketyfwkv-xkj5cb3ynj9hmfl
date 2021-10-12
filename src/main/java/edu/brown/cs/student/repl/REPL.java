@@ -31,6 +31,7 @@ public class REPL {
     // Set up global variables
     String url;
     GsonParser gsonParser = new GsonParser();
+    List<Command> commandsList = this.listCommands();
     try (BufferedReader br = new BufferedReader(new InputStreamReader(System.in))) {
       String input;
       while ((input = br.readLine()) != null) {
@@ -38,7 +39,8 @@ public class REPL {
           input = input.trim();
           String[] arguments = input.split(" ");
           // new repl implementation start
-          for (Command command : this.listCommands()) {
+          // todo : hashmap better than list
+          for (Command command : commandsList) {
             if (command.getCommand().equals(arguments[0])) {
               command.runCommand(arguments);
             }
@@ -193,6 +195,7 @@ public class REPL {
     Users usersCommand = new Users();
     commands.add(usersCommand);
     commands.add(new Similar(usersCommand));
+    commands.add(new Classify(usersCommand));
     commands.add(new Add());
     commands.add(new Subtract());
     commands.add(new ResponseGet());
