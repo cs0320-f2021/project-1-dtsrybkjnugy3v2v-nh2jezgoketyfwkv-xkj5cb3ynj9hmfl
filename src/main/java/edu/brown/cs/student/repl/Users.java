@@ -24,7 +24,7 @@ public class Users implements Command {
   public void runCommand(String[] arguments) throws IllegalAccessException {
     String url = arguments[1];
     GsonParser gsonParser = new GsonParser();
-    List<IKDInsertable> users = gsonParser.openRentFile(url);
+    List<IKDInsertable> users = gsonParser.openUserFile(url);
     KDTree userKDTree = new KDTree(users);
     this.root = userKDTree.getRoot();
     HashMap<Integer, IKDInsertable> userHashMap = new HashMap<>();
