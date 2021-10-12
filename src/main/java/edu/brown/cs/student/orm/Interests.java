@@ -8,4 +8,11 @@ public class Interests {
   public Interests(Map<String, String> mapper) {
     this.interest = mapper.get("interest");
   }
+
+  @Override
+  public String toString() {
+    return "Interests{" +
+        "interest='" + interest + '\'' +
+        '}';
+  }
 }

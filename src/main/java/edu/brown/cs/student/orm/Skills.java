@@ -14,8 +14,7 @@ public class Skills {
   @Override
   public String toString() {
     return "Skills{"
-        + ", name='" + name + '\''
-        + ", commenting=" + commenting
+        + "commenting=" + commenting
         + ", testing=" + testing
         + ", OOP=" + OOP
         + ", algorithms=" + algorithms

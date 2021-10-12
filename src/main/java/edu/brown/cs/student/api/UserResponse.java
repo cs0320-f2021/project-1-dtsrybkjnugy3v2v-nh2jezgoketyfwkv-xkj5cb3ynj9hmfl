@@ -47,7 +47,7 @@ public class UserResponse implements IKDInsertable {
         + marginalized_groups + ", prefer_group=" + prefer_group + "]";
   }
 
-  public void getSkills() throws SQLException, ClassNotFoundException, InvocationTargetException,
+  public void setSkills() throws SQLException, ClassNotFoundException, InvocationTargetException,
       InstantiationException, IllegalAccessException, NoSuchMethodException {
     database = new Database("data/project-1/integration.sqlite3");
     Map<String, String> queryParams = new HashMap<>();
@@ -57,7 +57,7 @@ public class UserResponse implements IKDInsertable {
     System.out.println(skills);
   }
 
-  public void getNegativeTraits() throws SQLException, ClassNotFoundException, InvocationTargetException,
+  public void setNegativeTraits() throws SQLException, ClassNotFoundException, InvocationTargetException,
       InstantiationException, IllegalAccessException, NoSuchMethodException {
     database = new Database("data/project-1/integration.sqlite3");
     Map<String, String> queryParams = new HashMap<>();
@@ -65,6 +65,26 @@ public class UserResponse implements IKDInsertable {
     List<Negative> negativeList = database.select(Negative.class, queryParams);
     negativeTraits = negativeList.get(0);
     System.out.println(negativeTraits);
+  }
+
+  public void setPositiveTraits() throws SQLException, ClassNotFoundException, InvocationTargetException,
+      InstantiationException, IllegalAccessException, NoSuchMethodException {
+    database = new Database("data/project-1/integration.sqlite3");
+    Map<String, String> queryParams = new HashMap<>();
+    queryParams.put("id", String.valueOf(id));
+    List<Positive> positiveList = database.select(Positive.class, queryParams);
+    positiveTraits = positiveList.get(0);
+    System.out.println(positiveTraits);
+  }
+
+  public void setInterests() throws SQLException, ClassNotFoundException, InvocationTargetException,
+      InstantiationException, IllegalAccessException, NoSuchMethodException {
+    database = new Database("data/project-1/integration.sqlite3");
+    Map<String, String> queryParams = new HashMap<>();
+    queryParams.put("id", String.valueOf(id));
+    List<Interests> interestsList = database.select(Interests.class, queryParams);
+    interests = interestsList.get(0);
+    System.out.println(interests);
   }
 
   @Override
