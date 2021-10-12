@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Map;
 import com.google.common.collect.ImmutableMap;
+import edu.brown.cs.student.repl.REPL;
 import freemarker.template.Configuration;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;

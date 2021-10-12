@@ -1,4 +1,4 @@
-package edu.brown.cs.student.main;
+package edu.brown.cs.student.repl;
 
 import edu.brown.cs.student.api.GsonParser;
 import edu.brown.cs.student.api.RentData;
@@ -17,6 +17,7 @@ import edu.brown.cs.student.stars.Star;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -38,6 +39,12 @@ public class REPL {
           String[] arguments = input.split(" ");
           MathBot mathBot = new MathBot();
 
+          for (Command command: this.listCommands()) {
+            if (command.getCommand().equals(arguments[0])) {
+              command.runCommand(arguments);
+            }
+
+          }
           switch (arguments[0]) {
             case "add":
               System.out.println(
@@ -169,6 +176,13 @@ public class REPL {
     } catch (Exception e) {
       System.out.println("ERROR: Invalid input for REPL");
     }
+  }
+
+  private List<Command> listCommands() {
+    ArrayList<Command> commands = new ArrayList<>();
+    Users users = new Users();
+    commands.add(users);
+    return commands;
   }
 
   private HashMap<String, Star> createStarList(String starFile) {
