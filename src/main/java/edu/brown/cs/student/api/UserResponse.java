@@ -1,12 +1,23 @@
 package edu.brown.cs.student.api;
 
 import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.orm.Database;
+import edu.brown.cs.student.orm.Interests;
+import edu.brown.cs.student.orm.Negative;
+import edu.brown.cs.student.orm.Positive;
+import edu.brown.cs.student.orm.Skills;
 
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class UserResponse implements IKDInsertable {
-  private double id;
+  //API Data
+  private int id;
   private String name;
   private String meeting;
   private String grade;
@@ -16,6 +27,13 @@ public class UserResponse implements IKDInsertable {
   private String preferred_language;
   private String marginalized_groups;
   private String prefer_group;
+  //ORM Data
+  private Skills skills;
+  private Interests interests;
+  private Negative negativeTraits;
+  private Positive positiveTraits;
+
+  private Database database;
   public UserResponse(int userId) {
     id = userId;
   }
@@ -27,6 +45,26 @@ public class UserResponse implements IKDInsertable {
         + ", horoscope=" + horoscope + ", meeting_times=" + meeting_times
         + ", preferred_langauge=" + preferred_language + ", marginalized_groups="
         + marginalized_groups + ", prefer_group=" + prefer_group + "]";
+  }
+
+  public void getSkills() throws SQLException, ClassNotFoundException, InvocationTargetException,
+      InstantiationException, IllegalAccessException, NoSuchMethodException {
+    database = new Database("data/project-1/integration.sqlite3");
+    Map<String, String> queryParams = new HashMap<>();
+    queryParams.put("id", String.valueOf(id));
+    List<Skills> skillsList = database.select(Skills.class, queryParams);
+    skills = skillsList.get(0);
+    System.out.println(skills);
+  }
+
+  public void getNegativeTraits() throws SQLException, ClassNotFoundException, InvocationTargetException,
+      InstantiationException, IllegalAccessException, NoSuchMethodException {
+    database = new Database("data/project-1/integration.sqlite3");
+    Map<String, String> queryParams = new HashMap<>();
+    queryParams.put("id", String.valueOf(id));
+    List<Negative> negativeList = database.select(Negative.class, queryParams);
+    negativeTraits = negativeList.get(0);
+    System.out.println(negativeTraits);
   }
 
   @Override

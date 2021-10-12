@@ -199,11 +199,15 @@ public class Database {
   public <T> List<T> select(Class<T> c, Map<String, String> queryParams) throws SQLException,
       InstantiationException, IllegalAccessException, IllegalArgumentException,
       InvocationTargetException, NoSuchMethodException, SecurityException {
+    // Gets class name
     String tableName = c.getSimpleName().toLowerCase();
+    // Creates list of params
     List<Object> params = new ArrayList<>();
+    //Gets keys
     Set<String> keys = queryParams.keySet();
     String wheres = "";
     int counter = 0;
+    // Cycles through keys
     for (String key : keys) {
       counter += 1;
       params.add(queryParams.get(key));
@@ -215,9 +219,10 @@ public class Database {
     }
 
     String sql = "SELECT * FROM " + tableName + " WHERE " + wheres + ";";
-    System.out.println(sql);
+    //System.out.println(sql);
     return sqlListQuery(c, sql, params);
   }
+
 
   private <T> List<T> sqlListQuery(Class<T> c, String sql, List<Object> insertValues) throws
       SQLException, InstantiationException, IllegalAccessException, IllegalArgumentException,
@@ -236,7 +241,7 @@ public class Database {
         int column = res.findColumn(fieldName);
         mapper.put(fieldName, res.getString(column));
       }
-      T node = (T) (c.getDeclaredConstructor(Map.class).newInstance(mapper));
+      T node = (c.getDeclaredConstructor(Map.class).newInstance(mapper));
       output.add(node);
     }
     System.out.println(output.size());
