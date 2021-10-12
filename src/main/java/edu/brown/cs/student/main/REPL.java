@@ -22,7 +22,6 @@ import java.util.List;
 
 public class REPL {
 
-  private static final int DEFAULT_PORT = 4567;
   private HashMap<String, Star> stars;
   private String file;
   private KDNode<User> root;
