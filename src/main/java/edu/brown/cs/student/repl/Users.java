@@ -1,7 +1,6 @@
 package edu.brown.cs.student.repl;
 
 import edu.brown.cs.student.api.GsonParser;
-import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.kdtree.IKDInsertable;
 import edu.brown.cs.student.kdtree.KDNode;
 import edu.brown.cs.student.kdtree.KDTree;
@@ -11,6 +10,7 @@ import java.util.List;
 
 public class Users implements Command {
   private KDNode root;
+  private HashMap<Integer, IKDInsertable> userHashMap;
 
   public Users() {
   }
@@ -26,15 +26,21 @@ public class Users implements Command {
     GsonParser gsonParser = new GsonParser();
     List<IKDInsertable> users = gsonParser.openUserFile(url);
     KDTree userKDTree = new KDTree(users);
+    System.out.println("From Users Run: " + userKDTree.getRoot());
+    this.getRoot();
     this.root = userKDTree.getRoot();
-    HashMap<Integer, IKDInsertable> userHashMap = new HashMap<>();
+    this.userHashMap = new HashMap<>();
     for (IKDInsertable user : users) {
-      userHashMap.put(user.returnID(), user);
+      this.userHashMap.put(user.returnID(), user);
     }
   }
 
-  public KDNode<User> getRoot() {
-    KDNode rootCopy = this.root;
-    return rootCopy;
+  public KDNode getRoot() {
+    System.out.println("getRoot from Users: " + this.root);
+    return this.root;
+  }
+
+  public HashMap<Integer, IKDInsertable> getHashMap() {
+    return this.userHashMap;
   }
 }

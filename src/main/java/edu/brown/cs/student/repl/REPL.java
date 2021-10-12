@@ -190,9 +190,12 @@ public class REPL {
 
   private List<Command> listCommands() {
     ArrayList<Command> commands = new ArrayList<>();
-    commands.add(new Users());
+    Users usersCommand = new Users();
+    commands.add(usersCommand);
+    commands.add(new Similar(usersCommand));
     commands.add(new Add());
     commands.add(new Subtract());
+    commands.add(new ResponseGet());
     return commands;
   }
 
