@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 
 public class KDTree implements IKDTree {
   private KDNode root;
@@ -25,6 +26,10 @@ public class KDTree implements IKDTree {
     this.root = treeGenerator(this.data, 0);
   }
 
+//  @Override
+//  public List subList(int startIndex, int endIndex) {
+//
+//  }
   /**
    * populates the tree.
    */
@@ -36,8 +41,8 @@ public class KDTree implements IKDTree {
       sortData(unsortedData, depth);
       int dataSize = unsortedData.size();
       IKDInsertable median = unsortedData.get((int) dataSize / 2); //will need to cast as int in case size it odd number
-      List leftList = unsortedData.subList(0, dataSize / 2);
-      List rightList = unsortedData.subList((dataSize / 2) + 1, unsortedData.size());
+      List leftList = new ArrayList<>(unsortedData.subList(0, dataSize / 2));
+      List rightList = new ArrayList<>(unsortedData.subList((dataSize / 2) + 1, unsortedData.size()));
       KDNode newRoot = new KDNode(median);
       newRoot.addLeftChild(treeGenerator(leftList, (depth + 1) % k));
       newRoot.addRightChild(treeGenerator(rightList, (depth + 1) % k));
@@ -121,6 +126,37 @@ public class KDTree implements IKDTree {
    */
   public KDNode getRoot() {
     return root;
+  }
+
+  @Override
+  public String toString() {
+    return "KdTree{"
+        + "dimensions=" + k
+        + ", tree=" + root.toString()
+        + '}';
+  }
+  /** Check if this KdTree is equal to the passed object.
+   @param o Another object
+   @return a Boolean ture/false if the objects are equal.
+   */
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+    KDTree kdTree = (KDTree) o;
+    return k == kdTree.k && Objects.equals(root, kdTree.root);
+  }
+
+  /** Get a hashcode for a KdTree.
+   @return an int representing the hash index.
+   */
+  @Override
+  public int hashCode() {
+    return Objects.hash(k, root);
   }
 
 }

@@ -38,7 +38,7 @@
 	In light of this study, one is forced to consider what other minorities are similarly influenced. 
     Other minority groups that we have considered that may also be vulnerable to self-inflicted biases 
     are people of color, such as African Americans and people of Latin American heritage, people of 
-    lower socio-economic class, and people with disabilities. Our matchmaker’s results may consistently 
+    lower socio-economic class, and/or people with disabilities. Our matchmaker’s results may consistently 
     rate these people as “of lower tier,” and perhaps consistently match them with people of “similar ability,” 
     thus perpetuating their sense of inadequacy into the future. Said teams may achieve less than their 
     “higher tier” counterparts, not because of inherent ability, but because of self-perceived limits.
