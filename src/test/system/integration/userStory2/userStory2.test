@@ -1,0 +1,6 @@
+INPUT
+recsys_load responses
+OUTPUT
+Loaded Recommender with k students.
+END
+

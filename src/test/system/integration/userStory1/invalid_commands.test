@@ -1,0 +1,6 @@
+INPUT
+invalid
+
+OUTPUT
+ERROR: Invalid input for REPL
+END
