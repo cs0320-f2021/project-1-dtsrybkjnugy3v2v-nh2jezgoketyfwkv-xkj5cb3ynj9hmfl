@@ -21,7 +21,7 @@ public class REPL {
           // finds which command to run based on the string input from the map and runs it
           commandsMap.get(arguments[0]).runCommand(arguments);
         } catch (Exception e) {
-          e.printStackTrace();
+//          e.printStackTrace();
           System.out.println("ERROR: We couldn't process your input");
         }
       }
@@ -50,7 +50,7 @@ public class REPL {
     commands.put(addCommand.getCommand(), addCommand);
     Subtract subtractCommand = new Subtract();
     commands.put(subtractCommand.getCommand(), subtractCommand);
-    ResponseGet responseCommand = new ResponseGet();
+    LoadResponses responseCommand = new LoadResponses();
     commands.put(responseCommand.getCommand(), responseCommand);
     return commands;
   }

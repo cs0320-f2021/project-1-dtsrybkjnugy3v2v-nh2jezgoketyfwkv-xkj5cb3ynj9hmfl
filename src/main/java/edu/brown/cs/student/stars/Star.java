@@ -3,6 +3,7 @@ package edu.brown.cs.student.stars;
 import edu.brown.cs.student.kdtree.IKDInsertable;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Star implements IKDInsertable {
 
@@ -55,12 +56,17 @@ public class Star implements IKDInsertable {
    * an array list
    */
   @Override
-  public ArrayList returnNumParams() {
-    ArrayList returnList = new ArrayList<>();
+  public ArrayList<Double> returnNumParams() {
+    ArrayList<Double> returnList = new ArrayList<>();
     returnList.add(this._x);
     returnList.add(this._y);
     returnList.add(this._z);
     return returnList;
+  }
+
+  @Override
+  public List<String> returnStringParams() {
+    return null;
   }
 
   @Override
