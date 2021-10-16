@@ -52,6 +52,8 @@ public class REPL {
     commands.put(subtractCommand.getCommand(), subtractCommand);
     ResponseGet responseCommand = new ResponseGet();
     commands.put(responseCommand.getCommand(), responseCommand);
+    PrintBest printCommand = new PrintBest();
+    commands.put(printCommand.getCommand(), printCommand);
     return commands;
   }
 }

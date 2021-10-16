@@ -54,6 +54,7 @@ public class KDCalculator {
 
     // adds the current  node to the list of nearest neighbors if the list is not full
     if (this.neighbors.size() < k) {
+      System.out.println("Adding: " + currNode.getUserID());
       this.neighbors.add(currNode);
 
     } else { // else, current node is added to the list if it is closer than a node in the list
@@ -61,6 +62,8 @@ public class KDCalculator {
       int i = 0;
       while (!inserted && i < k) {
         if (distance < this.neighbors.get(i).distance) {
+          System.out.println("Going to remove: " + this.neighbors.get(i).getUserID());
+          System.out.println("Replacing it with: " + currNode.getUserID());
           this.neighbors.remove(i);
           this.neighbors.add(i, currNode);
           inserted = true;
@@ -77,8 +80,10 @@ public class KDCalculator {
     this.neighbors.sort(new DistanceComparator());
     int numNeighbors = this.neighbors.size();
     double farthestDistance = this.neighbors.get(numNeighbors - 1).distance;
-    double relevantDistance = currNode.getNumParams().get(relevantAxis)
-        - relevantParam;
+    double relevantDistance = Math.abs(currNode.getNumParams().get(relevantAxis)
+        - relevantParam);
+    System.out.println("Farthest Distance: " + farthestDistance);
+    System.out.println("Relevant Distance/Axis: " + relevantDistance + "'" + relevantAxis);
 
     // recurse if farthest neighbor is farther than the relevant axis of the target and current node
     if ((farthestDistance > relevantDistance || numNeighbors < k) && !currNode.isLeaf()) {
