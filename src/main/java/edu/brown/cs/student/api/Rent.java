@@ -3,6 +3,7 @@ package edu.brown.cs.student.api;
 import edu.brown.cs.student.kdtree.IKDInsertable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -46,9 +47,14 @@ public class Rent implements IKDInsertable {
   @Override
   public ArrayList<Double> returnNumParams() {
     ArrayList<Double> returnList = new ArrayList<>();
-    returnList.add((double)this.rating);
-    returnList.add((double)this.size);
+    returnList.add((double) this.rating);
+    returnList.add((double) this.size);
     return returnList;
+  }
+
+  @Override
+  public List<String> returnStringParams() {
+    return null;
   }
 
   @Override

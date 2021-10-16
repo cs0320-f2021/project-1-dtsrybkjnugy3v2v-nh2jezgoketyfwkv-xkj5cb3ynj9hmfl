@@ -11,8 +11,10 @@ public class Interests {
 
   @Override
   public String toString() {
-    return "Interests{" +
-        "interest='" + interest + '\'' +
-        '}';
+    return "Interests{" + "interest='" + interest + '\'' + '}';
+  }
+
+  public String getInterest() {
+    return interest;
   }
 }

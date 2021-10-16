@@ -3,6 +3,7 @@ package edu.brown.cs.student.api;
 import edu.brown.cs.student.kdtree.IKDInsertable;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -43,6 +44,11 @@ public class Review implements IKDInsertable {
    */
   @Override
   public ArrayList returnNumParams() {
+    return null;
+  }
+
+  @Override
+  public List<String> returnStringParams() {
     return null;
   }
 

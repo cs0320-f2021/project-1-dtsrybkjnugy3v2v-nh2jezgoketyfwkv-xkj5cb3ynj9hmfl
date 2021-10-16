@@ -29,11 +29,16 @@ public class UserResponse implements IKDInsertable {
   private String prefer_group;
   //ORM Data
   private Skills skills;
-  private Interests interests;
-  private Negative negativeTraits;
-  private Positive positiveTraits;
+  private List<Negative> negativeTraits;
+  private List<Positive> positiveTraits;
+  private List<Interests> interests;
+  //Parameterized Data
+  private ArrayList<Double> coords;
+  private ArrayList<String> stringData;
 
+  // Instance variables
   private Database database;
+  private Map<String, String> queryParams;
   public UserResponse(int userId) {
     id = userId;
   }
@@ -46,58 +51,98 @@ public class UserResponse implements IKDInsertable {
         + ", preferred_langauge=" + preferred_language + ", marginalized_groups="
         + marginalized_groups + ", prefer_group=" + prefer_group + "]";
   }
-
-  public void setSkills() throws SQLException, ClassNotFoundException, InvocationTargetException,
+  /**
+   * Instantiates the class by setting the database and query params.
+   */
+  public void instantiate() throws SQLException, ClassNotFoundException, InvocationTargetException,
       InstantiationException, IllegalAccessException, NoSuchMethodException {
     database = new Database("data/project-1/integration.sqlite3");
-    Map<String, String> queryParams = new HashMap<>();
+    queryParams = new HashMap<>();
     queryParams.put("id", String.valueOf(id));
-    List<Skills> skillsList = database.select(Skills.class, queryParams);
-    skills = skillsList.get(0);
-    System.out.println(skills);
+    setORMData();
   }
 
-  //TODO Store entire array instead of first
-  //TODO seperate meeting times
-
-  public void setNegativeTraits() throws SQLException, ClassNotFoundException, InvocationTargetException,
+  /**
+   * Selects the ORM data from the database based on current user id and instantiates variables
+   * @throws SQLException
+   * @throws InvocationTargetException
+   * @throws InstantiationException
+   * @throws IllegalAccessException
+   * @throws NoSuchMethodException
+   */
+  public void setORMData() throws SQLException, InvocationTargetException,
       InstantiationException, IllegalAccessException, NoSuchMethodException {
-    database = new Database("data/project-1/integration.sqlite3");
-    Map<String, String> queryParams = new HashMap<>();
-    queryParams.put("id", String.valueOf(id));
-    List<Negative> negativeList = database.select(Negative.class, queryParams);
-    negativeTraits = negativeList.get(0);
-    System.out.println(negativeTraits);
-  }
-
-  public void setPositiveTraits() throws SQLException, ClassNotFoundException, InvocationTargetException,
-      InstantiationException, IllegalAccessException, NoSuchMethodException {
-    database = new Database("data/project-1/integration.sqlite3");
-    Map<String, String> queryParams = new HashMap<>();
-    queryParams.put("id", String.valueOf(id));
-    List<Positive> positiveList = database.select(Positive.class, queryParams);
-    positiveTraits = positiveList.get(0);
-    System.out.println(positiveTraits);
-  }
-
-  public void setInterests() throws SQLException, ClassNotFoundException, InvocationTargetException,
-      InstantiationException, IllegalAccessException, NoSuchMethodException {
-    database = new Database("data/project-1/integration.sqlite3");
-    Map<String, String> queryParams = new HashMap<>();
-    queryParams.put("id", String.valueOf(id));
-    List<Interests> interestsList = database.select(Interests.class, queryParams);
-    interests = interestsList.get(0);
-    System.out.println(interests);
+    skills = database.select(Skills.class, queryParams).get(0);
+    negativeTraits = database.select(Negative.class, queryParams);
+    positiveTraits = database.select(Positive.class, queryParams);
+    interests = database.select(Interests.class, queryParams);
   }
 
   @Override
-  public ArrayList returnNumParams() {
-    return null;
+  public ArrayList<Double> returnNumParams() {
+    setNumParams();
+    for (Double datum: coords) {
+      System.out.print(datum + ", ");
+    }
+    System.out.println();
+    return coords;
+  }
+
+  /**
+   * @return String Parameters
+   */
+  public List<String> returnStringParams() {
+    setStringParams();
+    for (String datum: stringData) {
+      System.out.print(datum + ", ");
+    }
+    return stringData;
+  }
+  /**
+   * Adds String parameters to the coords variable.
+   */
+  public void setNumParams() {
+    coords = skills.getCoords();
+    coords.add(years_of_experience);
+  }
+  /**
+   * Adds String parameters to the stringData variable.
+   */
+  private void setStringParams() {
+    // Adds string fields from API
+    stringData = new ArrayList<>();
+    stringData.add(meeting);
+    stringData.add(grade);
+    stringData.add(horoscope);
+    stringData.add(preferred_language);
+    stringData.add(marginalized_groups);
+    stringData.add(prefer_group);
+
+    // Removes empty fields
+    stringData.removeIf(String::isEmpty);
+
+    // adds negative traits
+    for (Negative negativeTrait: negativeTraits) {
+      stringData.add(negativeTrait.getTrait());
+    }
+    // adds positive traits
+    for (Positive positiveTrait: positiveTraits) {
+      stringData.add(positiveTrait.getTrait());
+    }
+    // adds interests
+    for (Interests interest: interests) {
+      stringData.add(interest.getInterest());
+    }
+    // Splits meeting times and adds to stringData
+    String[] meetingTimes = meeting_times.split(";");
+    for (String meetingTime: meetingTimes) {
+      stringData.add(meetingTime.strip());
+    }
   }
 
   @Override
   public int returnID() {
-    return 0;
+    return id;
   }
 
   @Override

@@ -1,52 +1,50 @@
 package edu.brown.cs.student.api;
 
-import edu.brown.cs.student.orm.Database;
+import edu.brown.cs.student.kdtree.IKDInsertable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.HashMap;
+
 
 /**
  * This class is used for collecting user data and combining users.
  */
 public class UserResponseData {
   private final String url;
-  private final Set<UserResponse> responseSet = new HashSet<>();
+  private final HashMap<Integer, IKDInsertable> responseMap = new HashMap<>();
+  private final ApiClient client;
+  private final GsonParser gsonParser;
 
-  public UserResponseData() throws SQLException, ClassNotFoundException {
+  public UserResponseData() {
     url = "https://runwayapi.herokuapp.com/integration";
+    client = new ApiClient();
+    gsonParser = new GsonParser();
   }
 
   /**
    * Stores users in a set.
    */
-  public void getData() throws SQLException, InvocationTargetException, InstantiationException,
-      IllegalAccessException, NoSuchMethodException, ClassNotFoundException {
-    // Get the api data
-    ApiClient client = new ApiClient();
-    GsonParser gsonParser = new GsonParser();
+  public void setData() throws SQLException, ClassNotFoundException, InvocationTargetException,
+      InstantiationException, IllegalAccessException, NoSuchMethodException {
+    //Parse responses and add the responses to set
     UserResponse[] responses = gsonParser.parseUserResponse(client.makeRequest(
         ClientRequestGenerator.getPostRequest(url)));
-
-    Collections.addAll(responseSet, responses);
-    //Cycle through responses and get data from the database using the api data's user ids
-    for (UserResponse response: responseSet) {
-      System.out.println(response);
-      response.setSkills();
-      response.setNegativeTraits();
-      response.setPositiveTraits();
-      response.setInterests();
-      System.out.println();
+    for (UserResponse response : responses) {
+      response.instantiate();
+//      response.returnStringParams();
+//      response.returnNumParams();
+      responseMap.put(response.returnID(), response);
     }
+    //Print number of responses loaded
+    System.out.println("Loaded " + responseMap.size() + " user responses");
   }
 
   /**
-   * Returns a list of all users.
-   * @return a set of Users
+   * @return a HashMap of users
    */
-  public Set<UserResponse> getSet() {
-    return responseSet;
+  public HashMap<Integer, IKDInsertable> getHashMap() {
+    return responseMap;
   }
 }
