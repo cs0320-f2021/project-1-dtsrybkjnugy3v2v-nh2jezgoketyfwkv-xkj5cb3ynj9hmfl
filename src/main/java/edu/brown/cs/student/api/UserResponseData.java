@@ -37,7 +37,7 @@ public class UserResponseData {
       responseMap.put(response.returnID(), response);
     }
     //Print number of responses loaded
-    System.out.println("Loaded " + responseMap.size() + " user responses");
+    System.out.println("Loaded Recommender with " + responseMap.size() + " students.");
   }
 
   /**

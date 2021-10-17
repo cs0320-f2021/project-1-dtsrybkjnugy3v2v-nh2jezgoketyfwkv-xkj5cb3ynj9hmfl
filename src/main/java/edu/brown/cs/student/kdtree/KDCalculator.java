@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class KDCalculator {
 
-  private ArrayList<KDNode<User>> neighbors;
+  private ArrayList<KDNode<Insertable>> neighbors;
   private static final String[] horoscopes = new String[12];
 
   public KDCalculator() {
@@ -31,7 +31,7 @@ public class KDCalculator {
    * @param targetUser the user whose neighbors we'd like to find
    * @param currNode the node which is currently being compared
    */
-  public void findNearestNeighbors(int k, User targetUser, KDNode<User> currNode) {
+  public void findNearestNeighbors(int k, Insertable targetUser, KDNode<Insertable> currNode) {
     double weight = (double) targetUser.returnNumParams().get(0);
     double age = (double) targetUser.returnNumParams().get(1);
     this.findNearestNeighbors(k, weight, age, currNode);
@@ -46,7 +46,7 @@ public class KDCalculator {
    */
 
   public void findNearestNeighbors(int k, double targetWeight,
-                                   double targetAge, KDNode<User> currNode) {
+                                   double targetAge, KDNode<Insertable> currNode) {
     double neighborWeight = currNode.getNumParams().get(0);
     double neighborAge = currNode.getNumParams().get(1);
     double distance = this.findDistance(targetWeight, targetAge, neighborWeight, neighborAge);
@@ -54,7 +54,7 @@ public class KDCalculator {
 
     // adds the current  node to the list of nearest neighbors if the list is not full
     if (this.neighbors.size() < k) {
-      System.out.println("Adding: " + currNode.getUserID());
+      //System.out.println("Adding: " + currNode.getUserID());
       this.neighbors.add(currNode);
 
     } else { // else, current node is added to the list if it is closer than a node in the list
@@ -62,8 +62,8 @@ public class KDCalculator {
       int i = 0;
       while (!inserted && i < k) {
         if (distance < this.neighbors.get(i).distance) {
-          System.out.println("Going to remove: " + this.neighbors.get(i).getUserID());
-          System.out.println("Replacing it with: " + currNode.getUserID());
+          //System.out.println("Going to remove: " + this.neighbors.get(i).getUserID());
+          //System.out.println("Replacing it with: " + currNode.getUserID());
           this.neighbors.remove(i);
           this.neighbors.add(i, currNode);
           inserted = true;
@@ -82,8 +82,8 @@ public class KDCalculator {
     double farthestDistance = this.neighbors.get(numNeighbors - 1).distance;
     double relevantDistance = Math.abs(currNode.getNumParams().get(relevantAxis)
         - relevantParam);
-    System.out.println("Farthest Distance: " + farthestDistance);
-    System.out.println("Relevant Distance/Axis: " + relevantDistance + "'" + relevantAxis);
+    //System.out.println("Farthest Distance: " + farthestDistance);
+    //System.out.println("Relevant Distance/Axis: " + relevantDistance + "'" + relevantAxis);
 
     // recurse if farthest neighbor is farther than the relevant axis of the target and current node
     if ((farthestDistance > relevantDistance || numNeighbors < k) && !currNode.isLeaf()) {
@@ -104,7 +104,7 @@ public class KDCalculator {
    * returns a list of the nearest neighbors so that they can be printed by the REPL.
    * @return an arrayList of KDNodes that are nearest neighbors
    */
-  public ArrayList<KDNode<User>> getNeighbors() {
+  public ArrayList<KDNode<Insertable>> getNeighbors() {
     return this.neighbors;
   }
 
@@ -115,9 +115,9 @@ public class KDCalculator {
    * @param user the user whose neighbors we'd like to find.
    * @param root the node of the tree which the nearest neighbors algorithm will start on
    */
-  public void classifyUsers(int k, User user, KDNode<User> root) {
+  public void classifyUsers(int k, User user, KDNode<Insertable> root) {
     this.findNearestNeighbors(k, user, root);
-    this.constructHoroscopeChart(k);
+    //this.constructHoroscopeChart(k);
   }
 
   /**
@@ -127,9 +127,9 @@ public class KDCalculator {
    * @param age the age to find the closest neighbors of. can be thought of as 'y'
    * @param root the node of the tree which the nearest neighbors algorithm will start on
    */
-  public void classifyUsers(int k, double weight, double age, KDNode<User> root) {
+  public void classifyUsers(int k, double weight, double age, KDNode<Insertable> root) {
     this.findNearestNeighbors(k, weight, age, root);
-    this.constructHoroscopeChart(k);
+    //this.constructHoroscopeChart(k);
   }
 
   /**
@@ -144,21 +144,21 @@ public class KDCalculator {
     return Math.sqrt(Math.pow(x - x2, 2) + Math.pow(y - y2, 2));
   }
 
-  private void constructHoroscopeChart(int numNeighbors) {
-    int[] horoscopeChart = new int[12]; // todo: should create Constant variable
-    for (int i = 0; i < numNeighbors; i++) {
-      User user = this.neighbors.get(i).datum;
-      String horoscope = user.getHoroscope();
-      for (int j = 0; j < horoscopes.length; j++) {
-        if (horoscopes[j].equals(horoscope)) {
-          int currCount = horoscopeChart[j];
-          currCount += 1;
-          horoscopeChart[j] = currCount;
-        }
-      }
-    }
-    this.printHoroscopeChart(horoscopeChart);
-  }
+//  private void constructHoroscopeChart(int numNeighbors) {
+//    int[] horoscopeChart = new int[12]; // todo: should create Constant variable
+//    for (int i = 0; i < numNeighbors; i++) {
+//      Insertable user = this.neighbors.get(i).datum;
+//      String horoscope = user.getHoroscope();
+//      for (int j = 0; j < horoscopes.length; j++) {
+//        if (horoscopes[j].equals(horoscope)) {
+//          int currCount = horoscopeChart[j];
+//          currCount += 1;
+//          horoscopeChart[j] = currCount;
+//        }
+//      }
+//    }
+//    this.printHoroscopeChart(horoscopeChart);
+//  }
 
   private void printHoroscopeChart(int[] horoscopeChart) {
     for (int i = 0; i < horoscopeChart.length; i++) {

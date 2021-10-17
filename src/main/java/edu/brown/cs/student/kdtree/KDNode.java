@@ -19,18 +19,18 @@ public class KDNode<T extends Insertable> {
     this.rightChild = null;
     this.distance = 0;
     this.userID = datum.returnID();
-    Class classObj = this.datum.getClass();
-    Field[] allFields = classObj.getDeclaredFields();
-    for (Field field : allFields) {
-      if (field.get(datum) instanceof Double) {
-        this.fieldValues.add((Double)field.get(datum));
-      }
-    }
+//    Class classObj = this.datum.getClass();
+//    Field[] allFields = classObj.getDeclaredFields();
+//    for (Field field : allFields) {
+//      if (field.get(datum) instanceof Double) {
+//        this.fieldValues.add((Double)field.get(datum));
+//      }
+//    }
   }
 
-  public ArrayList getFieldValues() {
-    return this.fieldValues;
-  }
+//  public ArrayList getFieldValues() {
+//    return this.fieldValues;
+//  }
 
   /**
    * getter for the depth parameter

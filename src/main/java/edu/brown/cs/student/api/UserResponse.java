@@ -17,24 +17,24 @@ import java.util.Objects;
 
 public class UserResponse implements Insertable {
   //API Data
-  private int id;
-  private String name;
-  private String meeting;
-  private String grade;
-  private double years_of_experience;
-  private String horoscope;
-  private String meeting_times;
-  private String preferred_language;
-  private String marginalized_groups;
-  private String prefer_group;
+  public int id;
+  public String name;
+  public String meeting;
+  public String grade;
+  public double years_of_experience;
+  public String horoscope;
+  public String meeting_times;
+  public String preferred_language;
+  public String marginalized_groups;
+  public String prefer_group;
   //ORM Data
-  private Skills skills;
-  private List<Negative> negativeTraits;
-  private List<Positive> positiveTraits;
-  private List<Interests> interests;
+  public Skills skills;
+  public List<Negative> negativeTraits;
+  public List<Positive> positiveTraits;
+  public List<Interests> interests;
   //Parameterized Data
-  private ArrayList<Double> coords;
-  private ArrayList<String> stringData;
+  public ArrayList<Double> coords;
+  public ArrayList<String> stringData;
 
   // Instance variables
   private Database database;
@@ -81,10 +81,11 @@ public class UserResponse implements Insertable {
   @Override
   public ArrayList<Double> returnNumParams() {
     setNumParams();
-    for (Double datum: coords) {
-      System.out.print(datum + ", ");
-    }
-    System.out.println();
+//    System.out.print("Student " + this.id + " ");
+//    for (Double datum: coords) {
+//      System.out.print(datum + ", ");
+//    }
+//    System.out.println();
     return coords;
   }
 
@@ -93,9 +94,9 @@ public class UserResponse implements Insertable {
    */
   public List<String> returnStringParams() {
     setStringParams();
-    for (String datum: stringData) {
-      System.out.print(datum + ", ");
-    }
+//    for (String datum: stringData) {
+//      System.out.print(datum + ", ");
+//    }
     return stringData;
   }
   /**
