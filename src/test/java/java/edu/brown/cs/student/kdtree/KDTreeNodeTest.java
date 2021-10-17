@@ -1,4 +1,4 @@
-package kdtree;
+package java.edu.brown.cs.student.kdtree;
 
 import edu.brown.cs.student.kdtree.KDNode;
 import edu.brown.cs.student.stars.Star;

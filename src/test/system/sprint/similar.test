@@ -1,0 +1,6 @@
+INPUT
+users data/project-1/justusersSMALL.json
+similar 2 87660
+OUTPUT
+721308
+336066

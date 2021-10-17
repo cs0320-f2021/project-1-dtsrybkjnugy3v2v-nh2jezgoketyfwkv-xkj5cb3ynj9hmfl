@@ -1,5 +1,5 @@
 INPUT
-invalid
+bad command
 
 OUTPUT
 ERROR: Invalid input for REPL
