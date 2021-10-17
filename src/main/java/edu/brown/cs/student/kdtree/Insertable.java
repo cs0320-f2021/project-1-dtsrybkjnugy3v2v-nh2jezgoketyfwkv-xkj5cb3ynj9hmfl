@@ -8,7 +8,7 @@ import java.util.List;
  * only data with parameters that are numerical and can be compared are viable to be
  * inserted into a KDTree.
  */
-public interface IKDInsertable {
+public interface Insertable {
   /**
    * method that returns all the parameters of the object that are numerical in
    * an array list.

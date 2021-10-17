@@ -1,14 +1,14 @@
 package edu.brown.cs.student.repl;
 
 import edu.brown.cs.student.api.UserResponseData;
-import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.Insertable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.HashMap;
 
 public class LoadResponses implements Command {
-  private HashMap<Integer, IKDInsertable> responsesHashMap;
+  private HashMap<Integer, Insertable> responsesHashMap;
   @Override
   public String getCommand() {
     return "responseGet";

@@ -1,6 +1,6 @@
 package edu.brown.cs.student.api;
 
-import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.Insertable;
 import edu.brown.cs.student.orm.Database;
 import edu.brown.cs.student.orm.Interests;
 import edu.brown.cs.student.orm.Negative;
@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class UserResponse implements IKDInsertable {
+public class UserResponse implements Insertable {
   //API Data
   private int id;
   private String name;

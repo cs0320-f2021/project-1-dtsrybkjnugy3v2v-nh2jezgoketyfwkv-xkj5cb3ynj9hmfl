@@ -1,10 +1,9 @@
 package edu.brown.cs.student.api;
 
-import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.Insertable;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
-import java.util.Collections;
 import java.util.HashMap;
 
 
@@ -13,7 +12,7 @@ import java.util.HashMap;
  */
 public class UserResponseData {
   private final String url;
-  private final HashMap<Integer, IKDInsertable> responseMap = new HashMap<>();
+  private final HashMap<Integer, Insertable> responseMap = new HashMap<>();
   private final ApiClient client;
   private final GsonParser gsonParser;
 
@@ -44,7 +43,7 @@ public class UserResponseData {
   /**
    * @return a HashMap of users
    */
-  public HashMap<Integer, IKDInsertable> getHashMap() {
+  public HashMap<Integer, Insertable> getHashMap() {
     return responseMap;
   }
 }

@@ -2,7 +2,7 @@ package edu.brown.cs.student.api;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
-import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.Insertable;
 
 import java.io.Reader;
 import java.nio.file.Files;
@@ -54,7 +54,7 @@ public class GsonParser {
     }
   }
 
-  public List<IKDInsertable> openRentFile(String url) {
+  public List<Insertable> openRentFile(String url) {
     try {
       Gson gson = new Gson();
 
@@ -73,7 +73,7 @@ public class GsonParser {
     }
   }
 
-  public List<IKDInsertable> openUserFile(String url) {
+  public List<Insertable> openUserFile(String url) {
     try {
       Gson gson = new Gson();
 
@@ -84,7 +84,7 @@ public class GsonParser {
       User[] users = gson.fromJson(reader, User[].class);
       // close reader
       reader.close();
-      for (IKDInsertable user: users) {
+      for (Insertable user: users) {
         System.out.println(user.returnNumParams());
       }
       return Arrays.asList(users);
@@ -95,7 +95,7 @@ public class GsonParser {
   }
 
 
-  public List<IKDInsertable> openReviewFile(String url) {
+  public List<Insertable> openReviewFile(String url) {
     try {
       Gson gson = new Gson();
 

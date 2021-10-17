@@ -9,7 +9,7 @@ import java.util.Objects;
 
 public class KDTree implements IKDTree {
   private KDNode root;
-  private List<IKDInsertable> data;
+  private List<Insertable> data;
   private int k; //the number of dimensions in the tree
   private Field[] fields;
 
@@ -17,7 +17,7 @@ public class KDTree implements IKDTree {
    * constructor for the KDTree.
    * @param data
    */
-  public KDTree(Collection<IKDInsertable> data) throws IllegalAccessException {
+  public KDTree(Collection<Insertable> data) throws IllegalAccessException {
     this.data = new ArrayList<>(data);
     KDNode firstNode = new KDNode(this.data.get(0));
     this.k = firstNode.getNumParams().size();
@@ -33,14 +33,14 @@ public class KDTree implements IKDTree {
   /**
    * populates the tree.
    */
-  public KDNode treeGenerator(List<IKDInsertable> unsortedData, int depth) throws IllegalAccessException {
+  public KDNode treeGenerator(List<Insertable> unsortedData, int depth) throws IllegalAccessException {
     if (unsortedData.size() == 0){
       return null;
     }
     else {
       sortData(unsortedData, depth);
       int dataSize = unsortedData.size();
-      IKDInsertable median = unsortedData.get((int) dataSize / 2); //will need to cast as int in case size it odd number
+      Insertable median = unsortedData.get((int) dataSize / 2); //will need to cast as int in case size it odd number
       List leftList = new ArrayList<>(unsortedData.subList(0, dataSize / 2));
       List rightList = new ArrayList<>(unsortedData.subList((dataSize / 2) + 1, unsortedData.size()));
       KDNode newRoot = new KDNode(median);
@@ -56,7 +56,7 @@ public class KDTree implements IKDTree {
    * @return a List of data
    * @throws IllegalAccessException
    */
-  public List<IKDInsertable> sortData(List<IKDInsertable> unsortedData, int depth) throws IllegalAccessException {
+  public List<Insertable> sortData(List<Insertable> unsortedData, int depth) throws IllegalAccessException {
     if (unsortedData.size() == 0) {
       return new ArrayList<>();
     }
@@ -64,8 +64,8 @@ public class KDTree implements IKDTree {
     return unsortedData;
   }
 
-  public Comparator<IKDInsertable> createComparator(int depth) {
-    class DataSorter implements Comparator<IKDInsertable> {
+  public Comparator<Insertable> createComparator(int depth) {
+    class DataSorter implements Comparator<Insertable> {
 
       /**
        * Compares its two arguments for order.  Returns a negative integer,
@@ -108,7 +108,7 @@ public class KDTree implements IKDTree {
        *                              being compared by this comparator.
        */
       @Override
-      public int compare(IKDInsertable o1, IKDInsertable o2) {
+      public int compare(Insertable o1, Insertable o2) {
         int nodeDepth = depth;
         Double compareValue1 = (Double) o1.returnNumParams().get(nodeDepth % k);
         Double compareValue2 = (Double) o2.returnNumParams().get(nodeDepth % k);
