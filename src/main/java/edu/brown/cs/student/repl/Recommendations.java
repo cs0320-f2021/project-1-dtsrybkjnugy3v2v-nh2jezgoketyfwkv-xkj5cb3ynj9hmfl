@@ -65,7 +65,7 @@ public class Recommendations implements Command {
       ids.add(node.datum.returnID());
     }
 
-    HashSet<String> neighbors = new HashSet<>();
+    ArrayList<String> neighbors = new ArrayList<>();
     // Cycles through Bloom Filter recommendations. If there is a user in both kdtree and bloomfilter
     // recommendations, we add it to the final neighbor list.
     for (UserResponse user : recommendations) {
@@ -76,15 +76,12 @@ public class Recommendations implements Command {
     // We cycle through the bloom filter recommendations again until the neighbor set is of size k
     int count = 0;
     while (neighbors.size() < numNeighbors) {
-      neighbors.add(recommendations.get(count).getId());
+      if (!neighbors.contains(recommendations.get(count).getId())) {
+        neighbors.add(recommendations.get(count).getId());
+      }
       count++;
     }
-    System.out.println("Recommendations");
-    for (UserResponse user : recommendations) {
-      System.out.println(user.getId());
-    }
 
-    System.out.println("Neighbors");
     for (String id : neighbors) {
       System.out.println(id);
     }
