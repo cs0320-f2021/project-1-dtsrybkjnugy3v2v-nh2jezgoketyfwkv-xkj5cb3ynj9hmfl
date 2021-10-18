@@ -1,19 +1,16 @@
 package edu.brown.cs.student.repl;
 
-import edu.brown.cs.student.api.GsonParser;
+import edu.brown.cs.student.api.User;
+import edu.brown.cs.student.api.UserResponse;
 import edu.brown.cs.student.api.UserResponseData;
+import edu.brown.cs.student.bloomFilter.recommender.Item;
 import edu.brown.cs.student.kdtree.Insertable;
-import edu.brown.cs.student.kdtree.KDNode;
-import edu.brown.cs.student.kdtree.KDTree;
-
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 
 public class LoadResponses implements Command {
-  private HashMap<Integer, Insertable> responsesHashMap;
-  private KDNode root;
+  private HashMap<String, UserResponse> responsesHashMap;
   @Override
   public String getCommand() {
     return "responseGet";
@@ -30,7 +27,7 @@ public class LoadResponses implements Command {
     responsesHashMap = userResponseData.getHashMap();
   }
 
-  public HashMap<Integer, Insertable> getHashMap() {
+  public HashMap<String, UserResponse> getHashMap() {
     return this.responsesHashMap;
   }
 }

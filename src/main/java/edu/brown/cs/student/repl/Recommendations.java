@@ -1,7 +1,10 @@
 package edu.brown.cs.student.repl;
 
-import edu.brown.cs.student.api.User;
+
 import edu.brown.cs.student.api.UserResponse;
+import edu.brown.cs.student.bloomFilter.bloomfilter.AndSimilarityComparator;
+import edu.brown.cs.student.bloomFilter.bloomfilter.BloomFilter;
+import edu.brown.cs.student.bloomFilter.bloomfilter.BloomFilterRecommender;
 import edu.brown.cs.student.kdtree.Insertable;
 import edu.brown.cs.student.kdtree.KDCalculator;
 import edu.brown.cs.student.kdtree.KDNode;
@@ -9,6 +12,9 @@ import edu.brown.cs.student.kdtree.KDTree;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 public class Recommendations implements Command {
   private final LoadResponses responses;
@@ -28,7 +34,8 @@ public class Recommendations implements Command {
   public void runCommand(String[] arguments)
       throws IllegalAccessException, SQLException, ClassNotFoundException,
       InvocationTargetException, InstantiationException, NoSuchMethodException {
-    if (arguments.length != 3) {
+    if (arguments.length != 3 || Double.parseDouble(arguments[1])
+        >= responses.getHashMap().size()) {
       throw new NoSuchMethodException("Invalid number of arguments");
     }
     //Create a KDT
@@ -40,11 +47,46 @@ public class Recommendations implements Command {
     int numNeighbors = Integer.parseInt(arguments[1]);
     // Argument 2 is student id who we are finding recommendations for
     int targetUserID = Integer.parseInt(arguments[2]);
-    UserResponse targetUser = (UserResponse) responses.getHashMap().get(targetUserID);
-    kdCalc.findNearestNeighbors(numNeighbors, targetUser, root);
+    UserResponse targetUser = (UserResponse) responses.getHashMap().get(String.valueOf(targetUserID));
+    kdCalc.findNearestNeighbors(numNeighbors + 1, targetUser, root);
 
-    for (KDNode<Insertable> neighbor : kdCalc.getNeighbors()) {
-      System.out.println(neighbor.getUserID());
+    // Create a new bloomfilter
+    BloomFilterRecommender<UserResponse> bloomFilter = new BloomFilterRecommender<>(responses.getHashMap(), 0.05);
+    // Target bloom filter
+    BloomFilter<String> target = bloomFilter.getBloomFilters().get(String.valueOf(targetUserID));
+    // Set comparator
+    bloomFilter.setBloomFilterComparator(new AndSimilarityComparator(target));
+    // Get recommendations
+    List<UserResponse> recommendations = bloomFilter.getTopKRecommendations(targetUser, numNeighbors);
+
+    ArrayList<KDNode<Insertable>> kdRecs = kdCalc.getNeighbors();
+    HashSet<Integer> ids = new HashSet<>();
+    for (KDNode<Insertable> node: kdRecs) {
+      ids.add(node.datum.returnID());
+    }
+
+    HashSet<String> neighbors = new HashSet<>();
+    // Cycles through Bloom Filter recommendations. If there is a user in both kdtree and bloomfilter
+    // recommendations, we add it to the final neighbor list.
+    for (UserResponse user : recommendations) {
+      if (ids.contains(user.returnID())) {
+        neighbors.add(user.getId());
+      }
+    }
+    // We cycle through the bloom filter recommendations again until the neighbor set is of size k
+    int count = 0;
+    while (neighbors.size() < numNeighbors) {
+      neighbors.add(recommendations.get(count).getId());
+      count++;
+    }
+    System.out.println("Recommendations");
+    for (UserResponse user : recommendations) {
+      System.out.println(user.getId());
+    }
+
+    System.out.println("Neighbors");
+    for (String id : neighbors) {
+      System.out.println(id);
     }
   }
 }

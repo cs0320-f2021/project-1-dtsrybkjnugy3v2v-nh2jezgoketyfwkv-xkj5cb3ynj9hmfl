@@ -17,7 +17,7 @@ public class KDTree implements IKDTree {
    * constructor for the KDTree.
    * @param data
    */
-  public KDTree(Collection<Insertable> data) throws IllegalAccessException {
+  public KDTree(Collection<? extends Insertable> data) throws IllegalAccessException {
     this.data = new ArrayList<>(data);
     KDNode firstNode = new KDNode(this.data.get(0));
     this.k = firstNode.getNumParams().size();
@@ -34,7 +34,7 @@ public class KDTree implements IKDTree {
    * populates the tree.
    */
   public KDNode treeGenerator(List<Insertable> unsortedData, int depth) throws IllegalAccessException {
-    if (unsortedData.size() == 0){
+    if (unsortedData.size() == 0) {
       return null;
     }
     else {

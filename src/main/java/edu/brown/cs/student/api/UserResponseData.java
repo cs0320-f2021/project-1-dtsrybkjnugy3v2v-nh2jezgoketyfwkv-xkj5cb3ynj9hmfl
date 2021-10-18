@@ -12,7 +12,7 @@ import java.util.HashMap;
  */
 public class UserResponseData {
   private final String url;
-  private final HashMap<Integer, Insertable> responseMap = new HashMap<>();
+  private final HashMap<String, UserResponse> responseMap = new HashMap<>();
   private final ApiClient client;
   private final GsonParser gsonParser;
 
@@ -34,7 +34,7 @@ public class UserResponseData {
       response.instantiate();
 //      response.returnStringParams();
 //      response.returnNumParams();
-      responseMap.put(response.returnID(), response);
+      responseMap.put(String.valueOf(response.returnID()), response);
     }
     //Print number of responses loaded
     System.out.println("Loaded Recommender with " + responseMap.size() + " students.");
@@ -43,7 +43,7 @@ public class UserResponseData {
   /**
    * @return a HashMap of users
    */
-  public HashMap<Integer, Insertable> getHashMap() {
+  public HashMap<String, UserResponse> getHashMap() {
     return responseMap;
   }
 }

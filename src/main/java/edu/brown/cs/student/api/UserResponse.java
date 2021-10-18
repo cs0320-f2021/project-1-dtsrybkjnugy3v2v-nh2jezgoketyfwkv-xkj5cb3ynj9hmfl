@@ -6,6 +6,7 @@ import edu.brown.cs.student.orm.Interests;
 import edu.brown.cs.student.orm.Negative;
 import edu.brown.cs.student.orm.Positive;
 import edu.brown.cs.student.orm.Skills;
+import edu.brown.cs.student.bloomFilter.recommender.Item;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -15,7 +16,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class UserResponse implements Insertable {
+public class UserResponse implements Insertable, Item {
+
   //API Data
   public int id;
   public String name;
@@ -89,16 +91,27 @@ public class UserResponse implements Insertable {
     return coords;
   }
 
+  @Override
+  public List<String> returnStringParams() {
+    return getVectorRepresentation();
+  }
+
   /**
    * @return String Parameters
    */
-  public List<String> returnStringParams() {
+  public List<String> getVectorRepresentation() {
     setStringParams();
 //    for (String datum: stringData) {
 //      System.out.print(datum + ", ");
 //    }
     return stringData;
   }
+
+  @Override
+  public String getId() {
+    return String.valueOf(id);
+  }
+
   /**
    * Adds String parameters to the coords variable.
    */
