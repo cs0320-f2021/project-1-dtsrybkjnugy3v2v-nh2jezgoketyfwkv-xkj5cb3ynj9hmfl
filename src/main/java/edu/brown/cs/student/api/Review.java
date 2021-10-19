@@ -1,6 +1,6 @@
 package edu.brown.cs.student.api;
 
-import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.Insertable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ import java.util.Objects;
  * This class is used for parsing json data. It is an outline af a user
  */
 
-public class Review implements IKDInsertable {
+public class Review implements Insertable {
   private String review_text;
   private String review_summary;
   private String review_date;

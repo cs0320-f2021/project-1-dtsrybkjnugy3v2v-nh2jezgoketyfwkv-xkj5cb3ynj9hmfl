@@ -1,11 +1,11 @@
 package edu.brown.cs.student.stars;
 
-import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.Insertable;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Star implements IKDInsertable {
+public class Star implements Insertable {
 
   private int _starID;
   private String _name;

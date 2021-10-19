@@ -1,6 +1,7 @@
 package edu.brown.cs.student.repl;
 
 import edu.brown.cs.student.api.User;
+import edu.brown.cs.student.kdtree.Insertable;
 import edu.brown.cs.student.kdtree.KDCalculator;
 import edu.brown.cs.student.kdtree.KDNode;
 
@@ -23,14 +24,14 @@ public class Similar implements Command {
       User targetUser = (User) usersCommand.getHashMap().get(targetUserID);
 
       kdCalc.findNearestNeighbors(numNeighbors, targetUser, usersCommand.getRoot());
-      for (KDNode<User> neighbor: kdCalc.getNeighbors()) {
+      for (KDNode<Insertable> neighbor: kdCalc.getNeighbors()) {
         System.out.println(neighbor.getUserID());
       }
     } else if (arguments.length == 4) {
       double targetWeight = Double.parseDouble(arguments[2]);
       double targetAge = Double.parseDouble(arguments[3]);
       kdCalc.findNearestNeighbors(numNeighbors, targetWeight, targetAge, usersCommand.getRoot());
-      for (KDNode<User> neighbor: kdCalc.getNeighbors()) {
+      for (KDNode<Insertable> neighbor: kdCalc.getNeighbors()) {
         System.out.println(neighbor.getUserID());
       }
     } else {

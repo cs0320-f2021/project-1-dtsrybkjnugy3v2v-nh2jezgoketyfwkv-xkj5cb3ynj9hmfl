@@ -1,11 +1,12 @@
 package edu.brown.cs.student.api;
 
-import edu.brown.cs.student.kdtree.IKDInsertable;
+import edu.brown.cs.student.kdtree.Insertable;
 import edu.brown.cs.student.orm.Database;
 import edu.brown.cs.student.orm.Interests;
 import edu.brown.cs.student.orm.Negative;
 import edu.brown.cs.student.orm.Positive;
 import edu.brown.cs.student.orm.Skills;
+import edu.brown.cs.student.bloomFilter.recommender.Item;
 
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
@@ -15,26 +16,27 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-public class UserResponse implements IKDInsertable {
+public class UserResponse implements Insertable, Item {
+
   //API Data
-  private int id;
-  private String name;
-  private String meeting;
-  private String grade;
-  private double years_of_experience;
-  private String horoscope;
-  private String meeting_times;
-  private String preferred_language;
-  private String marginalized_groups;
-  private String prefer_group;
+  public int id;
+  public String name;
+  public String meeting;
+  public String grade;
+  public double years_of_experience;
+  public String horoscope;
+  public String meeting_times;
+  public String preferred_language;
+  public String marginalized_groups;
+  public String prefer_group;
   //ORM Data
-  private Skills skills;
-  private List<Negative> negativeTraits;
-  private List<Positive> positiveTraits;
-  private List<Interests> interests;
+  public Skills skills;
+  public List<Negative> negativeTraits;
+  public List<Positive> positiveTraits;
+  public List<Interests> interests;
   //Parameterized Data
-  private ArrayList<Double> coords;
-  private ArrayList<String> stringData;
+  public ArrayList<Double> coords;
+  public ArrayList<String> stringData;
 
   // Instance variables
   private Database database;
@@ -81,23 +83,35 @@ public class UserResponse implements IKDInsertable {
   @Override
   public ArrayList<Double> returnNumParams() {
     setNumParams();
-    for (Double datum: coords) {
-      System.out.print(datum + ", ");
-    }
-    System.out.println();
+//    System.out.print("Student " + this.id + " ");
+//    for (Double datum: coords) {
+//      System.out.print(datum + ", ");
+//    }
+//    System.out.println();
     return coords;
+  }
+
+  @Override
+  public List<String> returnStringParams() {
+    return getVectorRepresentation();
   }
 
   /**
    * @return String Parameters
    */
-  public List<String> returnStringParams() {
+  public List<String> getVectorRepresentation() {
     setStringParams();
-    for (String datum: stringData) {
-      System.out.print(datum + ", ");
-    }
+//    for (String datum: stringData) {
+//      System.out.print(datum + ", ");
+//    }
     return stringData;
   }
+
+  @Override
+  public String getId() {
+    return String.valueOf(id);
+  }
+
   /**
    * Adds String parameters to the coords variable.
    */

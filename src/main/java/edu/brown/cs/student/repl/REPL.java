@@ -42,18 +42,27 @@ public class REPL {
     HashMap<String, Command> commands = new HashMap<>();
     Users usersCommand = new Users();
     commands.put(usersCommand.getCommand(), usersCommand);
+
     Similar similarCommand = new Similar(usersCommand);
     commands.put(similarCommand.getCommand(), similarCommand);
+
     Classify classifyCommand = new Classify(usersCommand);
     commands.put(classifyCommand.getCommand(), classifyCommand);
+
     Add addCommand = new Add();
     commands.put(addCommand.getCommand(), addCommand);
+
     Subtract subtractCommand = new Subtract();
     commands.put(subtractCommand.getCommand(), subtractCommand);
+
     LoadResponses responseCommand = new LoadResponses();
     commands.put(responseCommand.getCommand(), responseCommand);
+
     PrintBest printCommand = new PrintBest();
     commands.put(printCommand.getCommand(), printCommand);
+
+    Recommendations recommendationsCommand = new Recommendations(responseCommand);
+    commands.put(recommendationsCommand.getCommand(), recommendationsCommand);
     return commands;
   }
 }
