@@ -2,12 +2,10 @@ package edu.brown.cs.student.repl;
 
 import edu.brown.cs.student.api.UserResponse;
 
-import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 public class GenerateGroups implements Command {
   private Recommendations recCommand;
