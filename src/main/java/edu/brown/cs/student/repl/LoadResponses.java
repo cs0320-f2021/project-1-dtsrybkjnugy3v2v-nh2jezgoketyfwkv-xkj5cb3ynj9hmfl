@@ -1,10 +1,7 @@
 package edu.brown.cs.student.repl;
 
-import edu.brown.cs.student.api.User;
 import edu.brown.cs.student.api.UserResponse;
 import edu.brown.cs.student.api.UserResponseData;
-import edu.brown.cs.student.bloomFilter.recommender.Item;
-import edu.brown.cs.student.kdtree.Insertable;
 import java.lang.reflect.InvocationTargetException;
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -13,7 +10,7 @@ public class LoadResponses implements Command {
   private HashMap<String, UserResponse> responsesHashMap;
   @Override
   public String getCommand() {
-    return "responseGet";
+    return "recsys_load";
   }
 
   @Override
