@@ -1,5 +1,8 @@
 package edu.brown.cs.student.repl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.sql.SQLException;
+
 public class GenerateGroups implements Command {
   private Recommendations recCommand;
   public GenerateGroups(Recommendations recCommand) {
@@ -11,7 +14,8 @@ public class GenerateGroups implements Command {
   }
 
   @Override
-  public void runCommand(String[] arguments) {
-
+  public void runCommand(String[] arguments)
+      throws SQLException, ClassNotFoundException, InvocationTargetException,
+      IllegalAccessException, InstantiationException, NoSuchMethodException {
   }
 }

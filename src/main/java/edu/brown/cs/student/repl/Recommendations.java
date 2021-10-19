@@ -20,6 +20,7 @@ public class Recommendations implements Command {
   private final LoadResponses responses;
   private KDTree userKDTree;
   private KDNode root;
+  private ArrayList<String> neighbors;
 
   public Recommendations(LoadResponses responses) {
     this.responses = responses;
@@ -65,25 +66,29 @@ public class Recommendations implements Command {
       ids.add(node.datum.returnID());
     }
 
-    ArrayList<String> neighbors = new ArrayList<>();
+    this.neighbors = new ArrayList<>();
     // Cycles through Bloom Filter recommendations. If there is a user in both kdtree and bloomfilter
     // recommendations, we add it to the final neighbor list.
     for (UserResponse user : recommendations) {
       if (ids.contains(user.returnID())) {
-        neighbors.add(user.getId());
+        this.neighbors.add(user.getId());
       }
     }
     // We cycle through the bloom filter recommendations again until the neighbor set is of size k
     int count = 0;
-    while (neighbors.size() < numNeighbors) {
-      if (!neighbors.contains(recommendations.get(count).getId())) {
-        neighbors.add(recommendations.get(count).getId());
+    while (this.neighbors.size() < numNeighbors) {
+      if (!this.neighbors.contains(recommendations.get(count).getId())) {
+        this.neighbors.add(recommendations.get(count).getId());
       }
       count++;
     }
 
-    for (String id : neighbors) {
+    for (String id : this.neighbors) {
       System.out.println(id);
     }
+  }
+
+  public ArrayList<String> getRecs() {
+    return this.neighbors;
   }
 }
