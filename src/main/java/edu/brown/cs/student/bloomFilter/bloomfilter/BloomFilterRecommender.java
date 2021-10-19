@@ -11,8 +11,8 @@ import java.util.Map;
 import static java.util.stream.Collectors.toList;
 
 public class BloomFilterRecommender<T extends Item> implements Recommender<T> {
-  private HashMap<String, T> items;
-  private HashMap<String, BloomFilter<String>> bloomFilters;
+  private HashMap<String, T> items; //maps String to Student objects
+  private HashMap<String, BloomFilter<String>> bloomFilters; //maps string to their own BloomFilter
   private double desiredFalsePositiveRate;
   private int maxNumValues = 0;
 
