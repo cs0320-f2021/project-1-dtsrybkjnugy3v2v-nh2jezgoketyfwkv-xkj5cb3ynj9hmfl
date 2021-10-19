@@ -47,9 +47,10 @@ public class Recommendations implements Command {
     int numNeighbors = Integer.parseInt(arguments[1]);
     // Argument 2 is student id who we are finding recommendations for
     int targetUserID = Integer.parseInt(arguments[2]);
-    UserResponse targetUser = (UserResponse) responses.getHashMap().get(String.valueOf(targetUserID));
-    kdCalc.findNearestNeighbors(numNeighbors + 1, targetUser, root);
-
+    UserResponse targetUser = responses.getHashMap().get(String.valueOf(targetUserID));
+    try {
+      kdCalc.findNearestNeighbors(numNeighbors + 1, targetUser, root);
+    } catch(NullPointerException n) {}
     // Create a new bloomfilter
     BloomFilterRecommender<UserResponse> bloomFilter = new BloomFilterRecommender<>(responses.getHashMap(), 0.05);
     // Target bloom filter
@@ -81,7 +82,6 @@ public class Recommendations implements Command {
       }
       count++;
     }
-
     for (String id : neighbors) {
       System.out.println(id);
     }

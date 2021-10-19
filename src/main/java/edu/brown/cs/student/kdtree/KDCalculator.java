@@ -47,7 +47,7 @@ public class KDCalculator {
 
   public void findNearestNeighbors(int k, double targetWeight,
                                    double targetAge, KDNode<Insertable> currNode) {
-    double neighborWeight = currNode.getNumParams().get(0);
+    double neighborWeight = currNode.getNumParams().get(2);
     double neighborAge = currNode.getNumParams().get(1);
     double distance = this.findDistance(targetWeight, targetAge, neighborWeight, neighborAge);
     currNode.setDistance(distance);
