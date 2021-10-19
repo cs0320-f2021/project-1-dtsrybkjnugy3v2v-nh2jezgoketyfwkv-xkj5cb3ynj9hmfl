@@ -88,7 +88,57 @@ public class Recommendations implements Command {
     }
   }
 
-  public ArrayList<String> getRecs() {
-    return this.neighbors;
+  public String[] getRecs(int numRecs, String targetUserID) throws IllegalAccessException {
+    //Create a KDT
+    userKDTree = new KDTree(responses.getHashMap().values());
+    this.root = userKDTree.getRoot();
+    // Instantiate calculator
+    KDCalculator kdCalc = new KDCalculator();
+    UserResponse targetUser = responses.getHashMap().get(String.valueOf(targetUserID));
+    try {
+      kdCalc.findNearestNeighbors(numRecs + 1, targetUser, root);
+    } catch(NullPointerException n) {}
+    // Create a new bloomfilter
+    BloomFilterRecommender<UserResponse> bloomFilter = new BloomFilterRecommender<>(responses.getHashMap(), 0.05);
+    // Target bloom filter
+    BloomFilter<String> target = bloomFilter.getBloomFilters().get(String.valueOf(targetUserID));
+    // Set comparator
+    bloomFilter.setBloomFilterComparator(new AndSimilarityComparator(target));
+    // Get recommendations
+    List<UserResponse> recommendations = bloomFilter.getTopKRecommendations(targetUser, numRecs);
+
+    ArrayList<KDNode<Insertable>> kdRecs = kdCalc.getNeighbors();
+    HashSet<Integer> ids = new HashSet<>();
+    for (KDNode<Insertable> node: kdRecs) {
+      ids.add(node.datum.returnID());
+    }
+
+    this.neighbors = new ArrayList<>();
+    // Cycles through Bloom Filter recommendations. If there is a user in both kdtree and bloomfilter
+    // recommendations, we add it to the final neighbor list.
+    for (UserResponse user : recommendations) {
+      if (ids.contains(user.returnID())) {
+        this.neighbors.add(user.getId());
+      }
+    }
+    // We cycle through the bloom filter recommendations again until the neighbor set is of size k
+    int count = 0;
+    while (this.neighbors.size() < numRecs) {
+      if (!this.neighbors.contains(recommendations.get(count).getId())) {
+        this.neighbors.add(recommendations.get(count).getId());
+      }
+      count++;
+    }
+    String[] group = new String[numRecs];
+    count = 0;
+    for (String id : this.neighbors) {
+      group[count] = id;
+      count++;
+    }
+    return group;
+  }
+
+  public LoadResponses getResponses() {
+    return this.responses;
   }
 }
