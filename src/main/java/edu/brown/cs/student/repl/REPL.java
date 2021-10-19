@@ -63,6 +63,9 @@ public class REPL {
 
     Recommendations recommendationsCommand = new Recommendations(responseCommand);
     commands.put(recommendationsCommand.getCommand(), recommendationsCommand);
+
+    GenerateGroups generateCommand = new GenerateGroups(recommendationsCommand);
+    commands.put(generateCommand.getCommand(), recommendationsCommand);
     return commands;
   }
 }
